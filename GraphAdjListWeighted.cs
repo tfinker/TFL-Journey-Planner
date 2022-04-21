@@ -3,18 +3,18 @@ using System;
 
 namespace Tutorial_9
 {
-    class GraphAdjList : Graph
+    class GraphAdjListWeighted : GraphWeighted
     {
 
         protected LinkedList[] AL;
 
-        public GraphAdjList(String graphName, int numberOfVertices)
+        public GraphAdjListWeighted(String graphName, int numberOfVertices)
                : base(graphName, numberOfVertices)
         {
             AL = new LinkedList[numberOfVertices];
         }
 
-        public GraphAdjList(String graphName, int numberOfVertices, int[,] Edges)
+        public GraphAdjListWeighted(String graphName, int numberOfVertices, int[,] Edges)
                : base(graphName, numberOfVertices, Edges)
         {
             // Create the Adjacency List for the graph
@@ -28,7 +28,7 @@ namespace Tutorial_9
 
             for (int edge = 0; edge < Edges.GetLength(0); edge++)
             {
-                addEdge(Edges[edge, 0], Edges[edge, 1]);
+                addEdge(Edges[edge, 0], Edges[edge, 1], Edges[edge, 2]);
             }
 
         }
@@ -39,7 +39,7 @@ namespace Tutorial_9
             return (0 <= vertex & vertex <= numberOfVertices() - 1);
         }
 
-        override public bool addEdge(int sourceVertex, int destinationVertex)
+        override public bool addEdge(int sourceVertex, int destinationVertex, int weight)
         {
             if ( validVertex(sourceVertex) & validVertex(destinationVertex) )
             {
@@ -47,7 +47,7 @@ namespace Tutorial_9
 
                 var Nodes = AL[sourceVertex];
 
-                Nodes.InsertAtHead(new Edge(sourceVertex, destinationVertex));
+                Nodes.InsertAtHead(new Edge(sourceVertex, destinationVertex, weight));
 
                 cardEdges++;
 
@@ -127,7 +127,9 @@ namespace Tutorial_9
 
         }
 
-
+        public LinkedList getEdgeList(int vertex) {
+          return AL[vertex];
+        }
 
     } // GraphAdjMatrix
 

@@ -2,7 +2,7 @@
 
 namespace Tutorial_9
 {
-    abstract class Graph : IGraph
+    abstract class GraphWeighted : IGraphWeighted
     {
 
         private string  graphName    = "Unknown" ;
@@ -11,13 +11,13 @@ namespace Tutorial_9
 
         protected int cardEdges = 0;  // updated when add or delete an edge
 
-        public Graph( String graphName, int numberOfVertices )
+        public GraphWeighted( String graphName, int numberOfVertices )
         {
             this.graphName    = graphName ;
             this.cardVertices = numberOfVertices;
         }
 
-        public Graph(String graphName, int numberOfVertices, int[,] Edges )
+        public GraphWeighted(String graphName, int numberOfVertices, int[,] Edges )
         {
             this.graphName    = graphName;
             this.cardVertices = numberOfVertices;
@@ -38,7 +38,7 @@ namespace Tutorial_9
         }
 
         // add edge "(sV, dV)" to the graph
-        abstract public bool addEdge(int sourceVertex, int destinationVertex) ;
+        abstract public bool addEdge(int sourceVertex, int destinationVertex, int Weight) ;
 
         // remove edge "(sV, dV)" from the graph
         abstract public bool removeEdge(int sourceVertex, int destinationVertex) ;
