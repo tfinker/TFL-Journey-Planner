@@ -4,7 +4,8 @@ using System;
 namespace Tutorial_9
 {
 
-    class QueueObject : IComparable <QueueObject> {
+    
+    class QueueObject : IComparable<QueueObject> {
       public int Vertex {get;set;}
       public int Distance {get;set;}
 
@@ -13,18 +14,17 @@ namespace Tutorial_9
         Distance = distance;
       }
 
-      public int CompareTo(QueueObject obj){
-        if (obj == null)
+      public int CompareTo(QueueObject other){
+        if (other == null)
           return 1;
-        var otherQueueObject = obj as QueueObject;
-        return Distance.CompareTo(otherQueueObject.Distance);
+        return Distance.CompareTo(other.Distance);
       }
     }
     class ShortestPath
     {
       Edge[] EdgeTo;
       int[] DistTo;
-      PriorityQueue queue;
+      PriorityQueueHeap<QueueObject> queue;
 
       GraphAdjListWeighted AdjList;
 
@@ -32,7 +32,7 @@ namespace Tutorial_9
         AdjList = adjList;
         EdgeTo = new Edge[AdjList.numberOfVertices()];
         DistTo = new int[AdjList.numberOfVertices()];
-        queue = new PriorityQueue();
+        queue = new PriorityQueueHeap<QueueObject>();
 
         for(int i=0;i<AdjList.numberOfVertices();i++){
           DistTo[i] = int.MaxValue;
