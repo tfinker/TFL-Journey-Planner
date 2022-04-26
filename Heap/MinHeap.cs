@@ -6,22 +6,54 @@ namespace Tutorial_9
     class MinHeap<T> : Heap<T> where T : IComparable<T>
     {
 
+      public MinHeap() : base() {}
+
+      public MinHeap(T[] data) : base() {
+        for (int i =0; i<data.Length;i++){
+          InsertItem(data[i]);
+        }
+      }
+
       private int getLastIndex(){
         return heap.Length-1;
       }
       
       override public void InsertItem(T item){
+
+        if (item == null){
+          throw new ArgumentNullException();
+        }
           addToHeap(item);
           BubbleUp(getLastIndex());
           
       }
 
       override public T RemoveHead() {
+        var head = removeHead();
+        return head;
+      }
+
+      public List<T> Sort() {
+        List<T> sortedItems = new List<T>();
+
+        var copiedArray = new T[heap.Length-1];
+        Array.Copy(heap, 1, copiedArray, 0, copiedArray.Length);
+        var copiedHeap = new MinHeap<T>(copiedArray);
+        
+        for(int i=0;i<copiedHeap.Length;i++){
+          sortedItems.InsertLast(copiedHeap.RemoveHead());
+        }
+        return sortedItems;
+      }
+
+      private T removeHead(){
         int headIndex = 1;
+        if (Length == 0){
+          throw new IndexOutOfRangeException("Heap is empty");
+        }
         swapItems(headIndex, getLastIndex());
         var head = removeFromHeap(getLastIndex());
         BubbleDown(headIndex);
-
         return head;
       }
 

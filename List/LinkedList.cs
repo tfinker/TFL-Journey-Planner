@@ -5,6 +5,7 @@ namespace Tutorial_9
 
     class LinkedList {
       public LinkedListObject Head {get;set;}
+      public LinkedListObject Tail {get;set;}
       public int Length {get;set;}
 
       public LinkedList() {
@@ -12,8 +13,9 @@ namespace Tutorial_9
         Length = 0;
       }
 
-      public LinkedList(LinkedListObject obj) {
-        Head = obj;
+      public LinkedList(Object obj) {
+        Head = new LinkedListObject(obj, null, null);
+        Tail = Head;
         Length = 0;
 
       }
@@ -22,6 +24,16 @@ namespace Tutorial_9
         Head = new LinkedListObject(data, null, Head);
         if (Head.Next != null)
           Head.Next.Previous = Head;
+        if (Head.Next == null) {
+          Tail = Head;
+        }
+        Length++;
+      }
+
+      public void InsertAtTail(Object data) {
+        Tail = new LinkedListObject(data, Tail, null);
+        if (Tail.Previous != null)
+          Tail.Previous.Next = Tail;
         Length++;
       }
 
@@ -30,8 +42,10 @@ namespace Tutorial_9
         if (node.Next != null)
           node.Next.Previous = newNode;
         node.Next = newNode;
+        if (newNode.Next == null) {
+          Tail = newNode;
+        }
         Length++;
-
       }
 
 

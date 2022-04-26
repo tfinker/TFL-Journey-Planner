@@ -3,18 +3,18 @@ using System;
 
 namespace Tutorial_9
 {
-    class GraphAdjListWeighted : GraphWeighted
+    class GraphAdjList : Graph
     {
 
         protected LinkedList[] AL;
 
-        public GraphAdjListWeighted(String graphName, int numberOfVertices)
+        public GraphAdjList(String graphName, int numberOfVertices)
                : base(graphName, numberOfVertices)
         {
             AL = new LinkedList[numberOfVertices];
         }
 
-        public GraphAdjListWeighted(String graphName, int numberOfVertices, int[,] Edges)
+        public GraphAdjList(String graphName, int numberOfVertices, int[,] Edges)
                : base(graphName, numberOfVertices, Edges)
         {
             // Create the Adjacency List for the graph
@@ -28,7 +28,7 @@ namespace Tutorial_9
 
             for (int edge = 0; edge < Edges.GetLength(0); edge++)
             {
-                addEdge(Edges[edge, 0], Edges[edge, 1], Edges[edge, 2]);
+                addEdge(Edges[edge, 0], Edges[edge, 1]);
             }
 
         }
@@ -39,7 +39,7 @@ namespace Tutorial_9
             return (0 <= vertex & vertex <= numberOfVertices() - 1);
         }
 
-        override public bool addEdge(int sourceVertex, int destinationVertex, int weight)
+        override public bool addEdge(int sourceVertex, int destinationVertex)
         {
             if ( validVertex(sourceVertex) & validVertex(destinationVertex) )
             {
@@ -47,7 +47,7 @@ namespace Tutorial_9
 
                 var Nodes = AL[sourceVertex];
 
-                Nodes.InsertAtHead(new Edge(sourceVertex, destinationVertex, weight));
+                Nodes.InsertAtHead(new Edge<int>(sourceVertex, destinationVertex));
 
                 cardEdges++;
 
@@ -77,7 +77,7 @@ namespace Tutorial_9
                     var node = AL[sourceVertex].Head;
                     while(node != null) {
                       node = node.Next;
-                      var edge = (Edge) node.Data;
+                      var edge = (Edge<int>) node.Data;
                       if (edge.Target == destinationVertex) {
                         break;
                       }
@@ -110,7 +110,7 @@ namespace Tutorial_9
               var node = AL[sourceVertex].Head;
 
               while(node != null){
-                var edge = (Edge) node.Data;
+                var edge = (Edge<int>) node.Data;
                 if ( destinationVertex ==  edge.Target ) {
                   return true;
                 }
@@ -127,9 +127,7 @@ namespace Tutorial_9
 
         }
 
-        public LinkedList getEdgeList(int vertex) {
-          return AL[vertex];
-        }
+
 
     } // GraphAdjMatrix
 

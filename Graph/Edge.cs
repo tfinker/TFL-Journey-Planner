@@ -2,23 +2,30 @@ using System;
 
 namespace Tutorial_9
 {
-    class Edge
+    class Edge<T> : IComparable<Edge<T>>
     {
-        public int Source {get; set;}
-        public int Target {get; set;}
+        public T Source {get; set;}
+        public T Target {get; set;}
         public int Weight {get; set;}
         
 
-        public Edge(int source, int target) {
+        public Edge(T source, T target) {
           this.Source = source;
           this.Target = target;
         }
 
-        public Edge(int source, int target, int weight) {
+        public Edge(T source, T target, int weight) {
           this.Source = source;
           this.Target = target;
           this.Weight = weight;
         }
+
+        public int CompareTo(Edge<T> other){
+
+          //return 0;
+          throw new NotImplementedException("Cannot compare edges");
+        }
+        
 
         public void Print()
         {
