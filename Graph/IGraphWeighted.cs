@@ -13,6 +13,8 @@ namespace Tutorial_9
 
          bool removeEdge(int srcVertex, int destVertex);
 
+         bool modifyEdge(int srcVertex, int destVertex, int weight);
+
          bool isAdjacent(int srcVertex, int destVertex);
 
          void Print();

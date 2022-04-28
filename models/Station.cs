@@ -4,17 +4,17 @@ namespace Tutorial_9 {
   class Station {
 
     // TODO: Binary search tree to identify duplicate names quickly
-    static String[] names;
+    //static String[] names;
     public string Name {get;set;}
     public Platform[] platforms;
 
     static Station() {
-      names = new String[0];
+     // names = new String[0];
     }
 
     public Station(string name) {
       // validateName(name);
-      TubeController.InsertIntoArray<String>(ref names, name);
+     // TubeController.InsertIntoArray<String>(ref names, name);
       Name = name;
       platforms = new Platform[0];
     }

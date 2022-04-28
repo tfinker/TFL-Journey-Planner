@@ -12,7 +12,8 @@ namespace Tutorial_9 {
     Line[] lines;
     Station[] stations;
 
-    Closure[] closures;
+    List<TrackClosure> closures;
+    List<TrackDelay> delays;
 
     GraphAdjListWeighted graph;
 
@@ -20,6 +21,8 @@ namespace Tutorial_9 {
       platforms = new Platform[0];
       lines = new Line[0];
       stations = new Station[0];
+      closures = new List<TrackClosure>();
+      delays = new List<TrackDelay>();
     }
 
 
@@ -64,7 +67,6 @@ namespace Tutorial_9 {
     }
 
 
-
     public void PrintModel(){
 
       foreach(Line line in lines){
@@ -80,6 +82,10 @@ namespace Tutorial_9 {
       }
     }
 
+    public void printGraph(){
+      graph.Print();
+    }
+
     public int getVertexCount(){
       return platforms.Length;
     }
@@ -92,13 +98,6 @@ namespace Tutorial_9 {
       }
     }
 
-    private void modifyEdge(int sourceVertex, int targetVertex, int weight){
-
-    }
-    
-    public void addDelay(Platform sourcePlatform, Platform targetPlatform, int delay){
-
-    }
 
     private Platform getPlatformFromInt(int id){
       if (platforms[id].ID == id){
@@ -175,10 +174,120 @@ namespace Tutorial_9 {
         Console.WriteLine($"\n--Total time: {getTimeString(path.weight)}");
     }
 
+    public TrackClosure CloseSectionOfTrack(Line line, Station source, Station target, String reason){
+      // using line, station to station, get connections
+      // creation closure object with connections
+      // remove edges from graph
 
-    public void CloseSectionOfTrack(Line line, Station source, Station target){
+      // needs to check track section isn't already closed!
+      // what ahppens if target is before source?
+
+      var platform = source.GetPlatform(line);
+      var targetPlatform = target.GetPlatform(line);
+
+      TrackClosure closure = new TrackClosure(reason);
+
+      while(platform != targetPlatform){       
+        var connection = platform.getNextConnectionOnLine();
+
+        if (connection.Closure != null){
+          throw new InvalidOperationException($"Connection from {connection.Source.Station.Name} to {connection.Target.Station.Name} already closed");
+        }
+
+        connection.Closure = closure;
+        closure.addElement(connection);
+        graph.removeEdge(connection.Source.ID, connection.Target.ID );
+        
+        platform = connection.Target;
+      }
+
+      closures.InsertLast(closure);
+
+      return closure;
+
+    }
+
+    public void ReopenSectionOfTrack(TrackClosure closure){
+      foreach(Connection connection in closure.getElements()){
+        connection.Closure = null;
+        graph.addEdge(connection.Source.ID, connection.Target.ID, connection.standardTime);
+      }
+
+      closures.RemoveItem(closure);
+    }
+
+
+
+    private Connection validateDelay(Platform source, Platform target){
+      var connection = source.getNextConnectionOnLine();
+
+      if (connection.Target != target){
+        throw new InvalidOperationException($"Target platform does not match connection");
+      }
+
+      if (connection.Delay != null){
+        throw new InvalidOperationException($"Connection from {connection.Source.Station.Name} to {connection.Target.Station.Name} already has delay");
+      }
+
+      return connection;
+    }
+    public TrackDelay AddDelayToLine(Line line, Station source, Station target, String reason, int time){
+      // user needs to add delays to specific connections between stations
+      // any connections with a delay need to be added to a delay object
+      // a delay object should contain all adjacent connections with a delay
+      // this creates a track section of delays
+      // user can then clear a whole section of delays in one go
+
+
+
+      var connection = validateDelay(source.GetPlatform(line), target.GetPlatform(line));
+
+
+      var trackDelay = new TrackDelay(reason);
+      var delay = new Delay(connection, trackDelay, time);
+      trackDelay.Insert(delay);
+      delays.InsertLast(trackDelay);
+
+      connection.Delay = delay;
       
+      graph.modifyEdge(connection.Source.ID, connection.Target.ID, connection.standardTime + time);
+      
+      return trackDelay;
+
+    }
+
+
+    public void ExpandDelay(TrackDelay trackDelay, Station source, Station target, int time) {
+
+      var connection = validateDelay(source.GetPlatform(trackDelay.GetLine()), target.GetPlatform(trackDelay.GetLine()));
+
+      var delay = new Delay(connection, trackDelay, time);
+      trackDelay.Insert(delay);
+      connection.Delay = delay;
+      
+      graph.modifyEdge(connection.Source.ID, connection.Target.ID, connection.standardTime + time);
+      
+    }
+
+    public void RemoveDelay(TrackDelay trackDelay){
+      if (trackDelay == null) {
+        throw new InvalidOperationException("No track delay object given");
+      }
+      
+      var delayNode = trackDelay.getDelays().Head;
+
+      while(delayNode != null) {
+        var connection = delayNode.Data.Connection;
+        graph.modifyEdge(connection.Source.ID, connection.Target.ID, connection.standardTime);
+
+        connection.Delay = null;
+
+        delayNode = delayNode.Next;
+      }
+      
+      delays.RemoveItem(trackDelay);
+
     }
   }
 
-}
+}  

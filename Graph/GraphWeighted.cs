@@ -5,8 +5,8 @@ namespace Tutorial_9
     abstract class GraphWeighted : IGraphWeighted
     {
 
-        private string  graphName    = "Unknown" ;
-        private int     cardVertices = 0 ;
+        protected string  graphName    = "Unknown" ;
+        protected int     cardVertices = 0 ;
         private int[,]  Edges ;
 
         protected int cardEdges = 0;  // updated when add or delete an edge
@@ -43,30 +43,15 @@ namespace Tutorial_9
         // remove edge "(sV, dV)" from the graph
         abstract public bool removeEdge(int sourceVertex, int destinationVertex) ;
 
+        // modify edge "(sV, dV)" of the graph
+        abstract public bool modifyEdge(int sourceVertex, int destinationVertex, int weight) ;
+
         // check if 2 vertices sV  dV are adjacent, i.e. neighbours   
         abstract public bool isAdjacent(int sourceVertex, int destinationVertex);
+        abstract public void Print();
 
 
-        public void Print()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Graph: {0}, Card(V) = {1}, card(E) = {2}", 
-                                      graphName,     cardVertices,  cardEdges  ) ;
-            Console.WriteLine("Edges:" ) ;
 
-            for (int sourceVertex = 0; sourceVertex < cardVertices; sourceVertex++)
-            {
-                for (int destinationVertex = 0; destinationVertex < cardVertices; destinationVertex++)
-                {
-                    if ( isAdjacent( sourceVertex, destinationVertex) )
-                    {
-                        Console.WriteLine(sourceVertex + " --> " + destinationVertex) ;
-                    }
-                }
-            }
-
-            Console.WriteLine();
-        }
 
 
     }

@@ -1,13 +1,15 @@
 using System;
 
 namespace Tutorial_9 {
+
   enum Direction {
     Westbound,
     Eastbound,
     Northbound,
     Southbound,
     Clockwise,
-    Anticlockwise
+    Anticlockwise,
+    Both // special case for track closures
   }
 
   enum LineName {
@@ -25,12 +27,12 @@ namespace Tutorial_9 {
     public LineName Name {get;}
     public Direction Direction {get;}
 
-    public LinkedList stations;
+    public LinkedList<Station> stations;
 
     public Line(LineName name, Direction direction){
       Name = name;
       Direction = direction;
-      stations = new LinkedList();
+      stations = new LinkedList<Station>();
       
     }
 

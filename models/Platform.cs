@@ -29,6 +29,15 @@ namespace Tutorial_9 {
       return null;
     }
 
+    public Connection getNextConnectionOnLine(){
+      foreach(var connection in connections){
+        if (connection.Target.Line == this.Line){
+          return connection;
+        }
+      }
+      return null;
+    }
+
     override public String ToString(){
       var str = $"Platform: {ID}, Station: {Station.Name}, Line: {Line.Name.ToString()} {Line.Direction.ToString()}";
       foreach(Connection connection in connections){

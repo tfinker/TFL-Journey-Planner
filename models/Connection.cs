@@ -8,10 +8,14 @@ namespace Tutorial_9 {
   }
 
   class Connection {
-    public Platform Source;
-    public Platform Target;
-    public int standardTime;
-    public ModeType mode;
+    public Platform Source {get;}
+    public Platform Target {get;}
+    public int standardTime {get;}
+    public ModeType mode {get;}
+
+    public TrackClosure Closure {get;set;}
+
+    public Delay Delay {get;set;}
 
     public Connection(Platform source, Platform target, int time, ModeType mode) {
       this.Source = source;
@@ -19,5 +23,7 @@ namespace Tutorial_9 {
       this.standardTime = time;
       this.mode = mode;
     }
+
+
   }
 }

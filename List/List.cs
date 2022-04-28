@@ -9,7 +9,7 @@ namespace Tutorial_9 {
     
   }
   
-  class List<T> : IList<T>, IEnumerable where T : IComparable<T> {
+  class List<T> : /*IList<T>,*/ IEnumerable { //where T : IComparable<T> { 
 
     T[] array;
 
@@ -38,10 +38,30 @@ namespace Tutorial_9 {
       array = newArray;
     }
 
-    // private void RemoveFromArray(ref T[] array, T item){
-    //   Array.Resize(ref array, array.Length+1);
-    //   array[array.Length-1] = item;
-    // }
+    private T RemoveIndexFromArray(int index){
+      
+      if (index >= array.Length){
+        throw new IndexOutOfRangeException();
+      } 
+           
+      T[] newArray = new T[array.Length-1];
+
+      T item = array[index];
+
+      if (index == 0){
+        Array.Copy(array, index+1, newArray, index, newArray.Length );
+      }
+      else if ( index == array.Length-1 ){
+        Array.Copy(array, 0, newArray, 0, index );
+      }
+      else if (index > 0 && index < array.Length-1) {
+        Array.Copy(array, 0, newArray, 0, index );
+        Array.Copy(array, index+1, newArray, index, array.Length - 1 - index );
+      }
+
+      array = newArray;
+      return item;
+    }
 
     public void InsertFirst(T item) {
       InsertAtIndex(item, 0);
@@ -76,8 +96,12 @@ namespace Tutorial_9 {
       return array[index];
     }
 
-    // public bool itemExists(T item){
+    public T RemoveItem( T item ){
+      
+      return RemoveIndexFromArray(getIndexOfItem(item));
+    }
 
+    // public bool itemExists(T item){
     // }
 
     // TODO: better way to find item? binary sort tree?
@@ -94,10 +118,10 @@ namespace Tutorial_9 {
       return array.Length;
     }
 
-    public void Sort(){
-      T[] sortedArray = new T[array.Length];
+    // public void Sort(){
+    //   T[] sortedArray = new T[array.Length];
 
-    }
+    // }
 
     IEnumerator IEnumerable.GetEnumerator()
     {

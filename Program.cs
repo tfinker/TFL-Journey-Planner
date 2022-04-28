@@ -314,10 +314,32 @@ namespace Tutorial_9
 
             tube.loadWeightedGraph("Tube");
 
-            var path = tube.getShortestPath(Walthamstow, FinsburyPark);
-            if (path != null){
-                tube.printPath(path);
-            }
+            // var path = tube.getShortestPath(Walthamstow, FinsburyPark);
+            // if (path != null){
+            //     tube.printPath(path);
+            // }
+            // tube.printGraph();
+
+            // var closure = tube.CloseSectionOfTrack(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Leaves on track");
+            
+            // tube.printGraph();
+
+            // tube.ReopenSectionOfTrack(closure);
+
+            // tube.printGraph();
+
+            // var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Hamsters", 2);
+            
+            // tube.printGraph();
+
+            // tube.ExpandDelay(delay, BlackhorseRoad, TottenhamHale, 2);
+
+            // tube.printGraph();
+
+            // tube.RemoveDelay(delay);
+
+            // tube.printGraph();
+
         }
     }
 }

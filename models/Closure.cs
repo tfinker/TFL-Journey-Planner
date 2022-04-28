@@ -1,18 +1,24 @@
 using System;
 
 namespace Tutorial_9 {
-  class Closure {
+  class TrackClosure {
 
-    LinkedList elements;
+    List<Connection> elements;
 
-    public Closure(){
-      elements = new LinkedList();
+    String Reason {get;}
+
+    public TrackClosure(String reason){
+      elements = new List<Connection>();
+      this.Reason = reason;
     }
 
     public void addElement(Connection connection){
-      elements.InsertAtTail(connection);
+      elements.InsertLast(connection);
     }
 
+    public List<Connection> getElements(){
+      return elements;
+    }
 
   }
 
