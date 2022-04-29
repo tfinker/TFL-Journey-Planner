@@ -1,53 +1,49 @@
 using System;
 
-namespace Tutorial_9 {
-
-  public class TubeModelException : Exception {
-      public TubeModelException() : base() {}
-      public TubeModelException(string message) : base(message) {}
-    }
+namespace LondonTube {
 
   class TubeController {
-    Platform[] platforms;
-    Line[] lines;
-    Station[] stations;
-
+    List<Platform> platforms;
+    List<Line> lines;
+    List<Station> stations;
     List<TrackClosure> closures;
     List<TrackDelay> delays;
 
     GraphAdjListWeighted graph;
 
     public TubeController() {
-      platforms = new Platform[0];
-      lines = new Line[0];
-      stations = new Station[0];
+      platforms = new List<Platform>();
+      lines = new List<Line>();
+      stations = new List<Station>();
       closures = new List<TrackClosure>();
       delays = new List<TrackDelay>();
     }
 
 
-    public void addPlatform(Platform platform){
-
-      InsertIntoArray(ref platforms, platform);
-
+    private void addPlatform(Platform platform){
+      try {
+        platforms.getItemAtIndex(platform.ID);
+      }
+      catch (IndexOutOfRangeException){
+        throw new InvalidOperationException($"Platform ID {platform.ID} clash");
+      }
+      platforms.InsertAtIndex(platform, platform.ID);
     }
 
     public Station createStation(String name){
       Station station = new Station(name);
-      InsertIntoArray(ref stations, station);
-
+      stations.InsertLast(station);
       return station;
     }
     public Line createLine(LineName lineName, Direction direction){
       Line newLine = new Line(lineName, direction);
-      
-      InsertIntoArray(ref lines, newLine);
+      lines.InsertLast(newLine);
 
       return newLine;
     }
 
     public void addStationToLine(Line line, Station station){
-      var platform = new Platform(line, station, platforms.Length);
+      var platform = new Platform(line, station, platforms.getLength());
       addPlatform(platform);
       station.AddPlatform( platform );
       line.addStation(station);
@@ -58,12 +54,6 @@ namespace Tutorial_9 {
       var targetPlatform = target.GetPlatform(targetLine);
 
       sourcePlatform.addConnection( new Connection(sourcePlatform, targetPlatform, time, mode) );
-    }
-
-
-    static public void InsertIntoArray<T>(ref T[] array, T item){
-      Array.Resize(ref array, array.Length+1);
-      array[array.Length-1] = item;
     }
 
 
@@ -87,7 +77,7 @@ namespace Tutorial_9 {
     }
 
     public int getVertexCount(){
-      return platforms.Length;
+      return platforms.getLength();
     }
     public void loadWeightedGraph(String name){
       graph = new GraphAdjListWeighted(name, getVertexCount());
@@ -106,11 +96,10 @@ namespace Tutorial_9 {
       throw new IndexOutOfRangeException("Platform IDs do not match");
     }
 
-    private List<Path<Platform>> mapPathsToTube(List<Path<int>> paths){
+    private List<Path<Platform>> mapPathsToModel(List<Path<int>> paths){
       var platformPaths = new List<Path<Platform>>();
 
       foreach(var path in paths){
-        
         var pPath = new Path<Platform>(getPlatformFromInt(path.startVertex), getPlatformFromInt(path.destination));
         foreach(Edge<int> edge in path.getPath()){
           var platformEdge = new Edge<Platform>(getPlatformFromInt(edge.Source), getPlatformFromInt(edge.Target), edge.Weight);
@@ -127,19 +116,18 @@ namespace Tutorial_9 {
       var paths = new MinHeap<Path<int>>();
       
       foreach( Platform sourcePlatform in source.platforms ){
+        var sp = new ShortestPath(graph, sourcePlatform.ID);
+
         foreach( Platform targetPlatform in target.platforms ){
-          
-          var sp = new ShortestPath(graph, sourcePlatform.ID);
           Path<int> path = sp.getShortestPathtoDestination(targetPlatform.ID);
           if (path != null){
             paths.InsertItem(path);
           }
-      
         }
       }
       List<Path<int>> orderedPaths = paths.Sort();
 
-      List<Path<Platform>> tubePaths = mapPathsToTube(orderedPaths);
+      List<Path<Platform>> tubePaths = mapPathsToModel(orderedPaths);
 
       return tubePaths.getFirstItem();
     }
@@ -174,17 +162,28 @@ namespace Tutorial_9 {
         Console.WriteLine($"\n--Total time: {getTimeString(path.weight)}");
     }
 
-    public TrackClosure CloseSectionOfTrack(Line line, Station source, Station target, String reason){
-      // using line, station to station, get connections
-      // creation closure object with connections
-      // remove edges from graph
+    private void validateTrackConnection(Platform source, Platform target){
+        // check if target is after source
 
-      // needs to check track section isn't already closed!
-      // what ahppens if target is before source?
+        var platform = source;
+        while(platform != target || platform == null) {
+          var connection = platform.getNextConnectionOnLine();
+          if (connection.Target == target){
+            return;
+          }
+          platform = connection.Target;
+        }
+
+        throw new InvalidOperationException("Target platform does not follow source platform on line");
+    }
+
+    public TrackClosure CloseSectionOfTrack(Line line, Station source, Station target, String reason){
 
       var platform = source.GetPlatform(line);
       var targetPlatform = target.GetPlatform(line);
 
+      validateTrackConnection(platform, targetPlatform);
+      
       TrackClosure closure = new TrackClosure(reason);
 
       while(platform != targetPlatform){       
@@ -210,7 +209,11 @@ namespace Tutorial_9 {
     public void ReopenSectionOfTrack(TrackClosure closure){
       foreach(Connection connection in closure.getElements()){
         connection.Closure = null;
-        graph.addEdge(connection.Source.ID, connection.Target.ID, connection.standardTime);
+        graph.addEdge(
+          connection.Source.ID, 
+          connection.Target.ID, 
+          connection.Delay == null ? connection.standardTime : connection.Delay.Time + connection.standardTime
+        );
       }
 
       closures.RemoveItem(closure);
@@ -219,6 +222,7 @@ namespace Tutorial_9 {
 
 
     private Connection validateDelay(Platform source, Platform target){
+
       var connection = source.getNextConnectionOnLine();
 
       if (connection.Target != target){
@@ -231,6 +235,7 @@ namespace Tutorial_9 {
 
       return connection;
     }
+
     public TrackDelay AddDelayToLine(Line line, Station source, Station target, String reason, int time){
       // user needs to add delays to specific connections between stations
       // any connections with a delay need to be added to a delay object
@@ -238,13 +243,11 @@ namespace Tutorial_9 {
       // this creates a track section of delays
       // user can then clear a whole section of delays in one go
 
-
-
       var connection = validateDelay(source.GetPlatform(line), target.GetPlatform(line));
-
 
       var trackDelay = new TrackDelay(reason);
       var delay = new Delay(connection, trackDelay, time);
+
       trackDelay.Insert(delay);
       delays.InsertLast(trackDelay);
 
@@ -259,6 +262,10 @@ namespace Tutorial_9 {
 
     public void ExpandDelay(TrackDelay trackDelay, Station source, Station target, int time) {
 
+      if ( time <= 0 ) {
+        throw new InvalidOperationException("Delay time must be greater than zero");
+      }
+
       var connection = validateDelay(source.GetPlatform(trackDelay.GetLine()), target.GetPlatform(trackDelay.GetLine()));
 
       var delay = new Delay(connection, trackDelay, time);
@@ -270,19 +277,13 @@ namespace Tutorial_9 {
     }
 
     public void RemoveDelay(TrackDelay trackDelay){
-      if (trackDelay == null) {
-        throw new InvalidOperationException("No track delay object given");
-      }
-      
-      var delayNode = trackDelay.getDelays().Head;
 
-      while(delayNode != null) {
-        var connection = delayNode.Data.Connection;
+      foreach(var delay in trackDelay.getDelays()) {
+        var connection = delay.Connection;
         graph.modifyEdge(connection.Source.ID, connection.Target.ID, connection.standardTime);
 
         connection.Delay = null;
 
-        delayNode = delayNode.Next;
       }
       
       delays.RemoveItem(trackDelay);

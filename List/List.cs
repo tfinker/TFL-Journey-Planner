@@ -1,15 +1,9 @@
 using System;
 using System.Collections;
 
-namespace Tutorial_9 {
-
-  public class ItemNotFoundException : Exception {
-    public ItemNotFoundException() : base() {}
-    public ItemNotFoundException(string message) : base(message) {}
-    
-  }
+namespace LondonTube {
   
-  class List<T> : /*IList<T>,*/ IEnumerable { //where T : IComparable<T> { 
+  class List<T> : IEnumerable { 
 
     T[] array;
 
@@ -90,14 +84,14 @@ namespace Tutorial_9 {
       return array[array.Length];
     }
     public T getItemAtIndex(int index) {
-      if (array.Length == 0){
+      if (array.Length == 0 || index >= array.Length){
         throw new IndexOutOfRangeException();
       }
       return array[index];
     }
 
     public T RemoveItem( T item ){
-      
+
       return RemoveIndexFromArray(getIndexOfItem(item));
     }
 
@@ -112,7 +106,7 @@ namespace Tutorial_9 {
           return i;
         }
       }
-      throw new ItemNotFoundException();
+      throw new IndexOutOfRangeException();
     }
     public int getLength() {
       return array.Length;
@@ -123,13 +117,23 @@ namespace Tutorial_9 {
 
     // }
 
+    public T this[int index]
+      {
+          get {
+              if (index >= array.Length) {
+                throw new IndexOutOfRangeException();
+              }
+              return getItemAtIndex(index);
+          }
+      }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
        return (IEnumerator) GetEnumerator();
     }
 
-    public Enumerator<T> GetEnumerator() {
-      return new Enumerator<T>(array);
+    public ListEnumerator<T> GetEnumerator() {
+      return new ListEnumerator<T>(array);
     }
   }
 }

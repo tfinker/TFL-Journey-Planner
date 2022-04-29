@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Tutorial_9
+namespace LondonTube
 {
     abstract class GraphWeighted : IGraphWeighted
     {
 
         protected string  graphName    = "Unknown" ;
         protected int     cardVertices = 0 ;
-        private int[,]  Edges ;
 
         protected int cardEdges = 0;  // updated when add or delete an edge
 
@@ -16,14 +15,6 @@ namespace Tutorial_9
             this.graphName    = graphName ;
             this.cardVertices = numberOfVertices;
         }
-
-        public GraphWeighted(String graphName, int numberOfVertices, int[,] Edges )
-        {
-            this.graphName    = graphName;
-            this.cardVertices = numberOfVertices;
-            this.Edges        = Edges ;
-        }
-
 
         /** Graph interface methods **/
 

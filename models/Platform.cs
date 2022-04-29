@@ -1,23 +1,23 @@
 using System;
 
-namespace Tutorial_9 {
+namespace LondonTube {
   class Platform {
 
     public int ID {get;}
     public Station Station {get;set;}
     public Line Line {get;set;}
 
-    public Connection[] connections;
+    public List<Connection> connections;
 
     public Platform(Line line, Station station, int id){
       this.ID = id;
       this.Station = station;
       this.Line = line;
-      connections = new Connection[0];
+      connections = new List<Connection>();
     }
 
     public void addConnection(Connection connection){
-      TubeController.InsertIntoArray<Connection>(ref connections, connection);
+      connections.InsertLast(connection);
     }
 
     public Connection getConnection(Platform target){

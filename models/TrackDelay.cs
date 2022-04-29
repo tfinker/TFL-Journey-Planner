@@ -1,6 +1,6 @@
 using System;
 
-namespace Tutorial_9 {
+namespace LondonTube {
   class TrackDelay {
 
     /* TrackDelay object contains a linked list of delays on a continuous section of track.
@@ -20,14 +20,14 @@ namespace Tutorial_9 {
       // Otherwise the delayToAdd does not belong in this TrackDelay object.
 
       if (delays.Length == 0){
-        delays.InsertAtHead(delayToAdd);
+        delays.InsertFirst(delayToAdd);
       }
       else {
         if (delayToAdd.Connection.Target == delays.Head.Data.Connection.Source){
-          delays.InsertAtHead(delayToAdd);
+          delays.InsertFirst(delayToAdd);
         }
         else if (delayToAdd.Connection.Source == delays.Tail.Data.Connection.Target){
-          delays.InsertAtTail(delayToAdd);
+          delays.InsertLast(delayToAdd);
         }
         else{
           throw new InvalidOperationException("Delay is not linked to this TrackDelay object");
@@ -47,10 +47,8 @@ namespace Tutorial_9 {
     public int GetTotalDelay() {
       int totalDelay =0;
 
-      var delay = delays.Head;
-      while(delay != null){
-        totalDelay += delay.Data.Time;
-        delay = delay.Next;
+      foreach(var delay in delays) {
+        totalDelay += delay.Time;
       }
       return totalDelay;
     }

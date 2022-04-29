@@ -2,28 +2,34 @@ using System;
 using System.Collections;
 
 namespace LondonTube{
-  public class ListEnumerator<T> : IEnumerator
+  class LinkedListEnumerator<T> : IEnumerator
   {
-      public T[] array;
+      //public T[] array;
+      public LinkedListObject<T> Node;
 
       // Enumerators are positioned before the first element
       // until the first MoveNext() call.
       int position = -1;
-
-      public ListEnumerator(T[] list)
+      private LinkedList<T> linkedList;
+      public LinkedListEnumerator(LinkedList<T> obj)
       {
-          array = list;
+          Node = linkedList.Head;
+          linkedList = obj;
+          
       }
 
       public bool MoveNext()
       {
           position++;
-          return (position < array.Length);
+          if (position > 0)
+            Node = Node.Next;
+          return (position < linkedList.Length);
       }
 
       public void Reset()
       {
           position = -1;
+          Node = linkedList.Head;
       }
 
       object IEnumerator.Current
@@ -40,7 +46,7 @@ namespace LondonTube{
           {
               try
               {
-                  return array[position];
+                  return Node.Data;
               }
               catch (IndexOutOfRangeException)
               {

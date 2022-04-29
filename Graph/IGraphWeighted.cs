@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Tutorial_9
+namespace LondonTube
 {
     interface IGraphWeighted
     {
