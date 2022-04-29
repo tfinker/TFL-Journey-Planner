@@ -1,6 +1,6 @@
 using System;
 
-namespace Tutorial_9
+namespace LondonTube
 {
 
     class MinHeap<T> : Heap<T> where T : IComparable<T>
@@ -36,9 +36,9 @@ namespace Tutorial_9
       public List<T> Sort() {
         List<T> sortedItems = new List<T>();
 
-        var copiedArray = new T[heap.Length-1];
-        Array.Copy(heap, 1, copiedArray, 0, copiedArray.Length);
-        var copiedHeap = new MinHeap<T>(copiedArray);
+        // var copiedArray = new T[heap.Length-1];
+        // Array.Copy(heap, 1, copiedArray, 0, copiedArray.Length);
+        var copiedHeap = new MinHeap<T>(heap[1..heap.Length]);
         
         for(int i=0;i<copiedHeap.Length;i++){
           sortedItems.InsertLast(copiedHeap.RemoveHead());

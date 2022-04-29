@@ -1,95 +1,11 @@
 ﻿using System;
 
-namespace Tutorial_9
+namespace LondonTube
 {
-    class TestingGraphs
+    class Program
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine("//              Testing Graphs                 //") ;
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine();
-
-            // const String name             = "Week 9 Graph";
-            // const int    numberOfVertices = 8 ;
-
-            // // int[,] Edges = new int[,] { { 0, 1 }, { 0, 2 }, { 0, 3 },
-            // //                             { 1, 0 }, { 1, 2 }, { 1, 3 }, { 1, 5}, 
-            // //                             { 2, 1 }, { 2, 5 }, { 2, 6 }, 
-            // //                             { 3, 0 }, { 3, 1 }, { 3, 7 },  
-            // //                             { 4, 2 }, 
-            // //                             //{ 5, 6 }, { 5, 7 },
-            // //                             { 6, 2, }, { 6, 4}
-            // //                           } ;
-            // int[,] Edges = new int[,] { { 0, 3, 6 }, { 0, 4, 4 }, // A 0
-            //                             { 1, 0, 1 }, { 1, 2, 8 },  // B 1
-            //                             // C 2
-            //                             { 3, 1, 3 }, { 3, 5, 3 },   // D 3
-            //                             { 4, 2, 1 }, { 4, 7, 9 }, // E 4
-            //                             { 5, 6, 8 },  // F 5
-            //                             { 6, 2, 1 },  // G 6 
-            //                             { 7, 5, 5 }, { 7, 6, 5 },// H 7
-            //                           } ;
-
-
-
-
-            // // Console.WriteLine("/////////////////////////////////////////////////////");
-            // // Console.WriteLine("// Create Undirected Graph using Adjacency Matrix  //");
-            // // Console.WriteLine("/////////////////////////////////////////////////////");
-            // // Console.WriteLine();
-
-            // // TO DO:  
-            // // Create the graph 
-
-            // // var graph = new GraphAdjMatrix(name, numberOfVertices, Edges);
-            // // graph.Print();
-
-            // var graph = new GraphAdjListWeighted(name, numberOfVertices, Edges);
-            // graph.Print();
-            
-            // var sp = new ShortestPath(graph);
-            // sp.getShortestPaths(0);
-
-            // Console.WriteLine();
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine("//    Test Undirected Graph methods            //");
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine();
-
-            // // TO DO:  
-            // // Test its methods 
-
-
-            // Console.WriteLine();
-            // Console.WriteLine();
-            // Console.WriteLine("//////////////////////////////////////////////////");
-            // Console.WriteLine("// Create Undirected Graph using Adjacency List //");
-            // Console.WriteLine("//////////////////////////////////////////////////");
-            // Console.WriteLine();
-
-            // // TO DO:  
-            // // Create the graph 
-
-            // Console.WriteLine();
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine("//    Test Graph methods                       //");
-            // Console.WriteLine("/////////////////////////////////////////////////");
-            // Console.WriteLine();
-
-            // TO DO:  
-            // Test its methods          
-
-
-           // var graph = new GraphAdjMatrixTraversal(name, numberOfVertices, Edges);
-            //graph.DepthFirstTraversal(6);
-
-            //graph.findDepthPath(7,0);
-            //graph.findBreadthPath(7,0);
-
-            //var list = new VertexLink[3];
-
             var tube = new TubeController();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,7 +28,7 @@ namespace Tutorial_9
             var Vauxhall            = tube.createStation( "Vauxhall" );
             var Stockwell           = tube.createStation( "Stockwell" );
             var Brixton             = tube.createStation( "Brixton" );
-/*
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //          Stations Jubilee Line
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,89 +93,89 @@ namespace Tutorial_9
 //          Stations Circle Line
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            var Stratford            = tube.createStation( "Hammersmith" );
-            var Stratford            = tube.createStation( "Goldhawk Road" );
-            var Stratford            = tube.createStation( "Shepherd's Bush Market" );
-            var Stratford            = tube.createStation( "Wood Lane" );
-            var Stratford            = tube.createStation( "White City" );
-            var Stratford            = tube.createStation( "Latimer Road" );
-            var Stratford            = tube.createStation( "Ladbroke Grove" );
-            var Stratford            = tube.createStation( "Westbourne Park" );
-            var Stratford            = tube.createStation( "Royal Oak" );
-            var Stratford            = tube.createStation( "Paddington" );
-            var Stratford            = tube.createStation( "Edgware Road" );
-            //var Stratford            = tube.createStation( "Baker Street" );
-            var Stratford            = tube.createStation( "Great Portland Street" );
-            var Stratford            = tube.createStation( "Euston Square" );
+            var Hammersmith            = tube.createStation( "Hammersmith" );
+            var GoldHawkRoad            = tube.createStation( "Goldhawk Road" );
+            var ShepherdsBushMarket            = tube.createStation( "Shepherd's Bush Market" );
+            var WoodLane            = tube.createStation( "Wood Lane" );
+            var WhiteCity            = tube.createStation( "White City" );
+            var LatimerRoad            = tube.createStation( "Latimer Road" );
+            var LadbrokeGrove            = tube.createStation( "Ladbroke Grove" );
+            var WestbournePark            = tube.createStation( "Westbourne Park" );
+            var RoyalOak            = tube.createStation( "Royal Oak" );
+            var Paddington            = tube.createStation( "Paddington" );
+            var EdgwareRoad            = tube.createStation( "Edgware Road" );
+            //var BakerStreet            = tube.createStation( "Baker Street" );
+            var GreatPortlandStreet            = tube.createStation( "Great Portland Street" );
+            var EustonSquare            = tube.createStation( "Euston Square" );
             //var Stratford            = tube.createStation( "King's Cross" );
-            var Stratford            = tube.createStation( "Farringdon" );
-            var Stratford            = tube.createStation( "Barbican" );
-            var Stratford            = tube.createStation( "Moorgate" );
-            var Stratford            = tube.createStation( "Liverpool Street" );
-            var Stratford            = tube.createStation( "Aldgate" );
-            var Stratford            = tube.createStation( "Tower Hill" );
-            var Stratford            = tube.createStation( "Monument" );
-            var Stratford            = tube.createStation( "Cannon Street" );
-            var Stratford            = tube.createStation( "Mansion House" );
-            var Stratford            = tube.createStation( "Blackfriars" );
-            var Stratford            = tube.createStation( "Temple" );
-            var Stratford            = tube.createStation( "Embankment" );
-            // var Stratford            = tube.createStation( "Westminster" );
-            var Stratford            = tube.createStation( "St James's Park" );
-            // var Stratford            = tube.createStation( "Victoria" );
-            var Stratford            = tube.createStation( "Sloane Square" );
-            var Stratford            = tube.createStation( "South Kensington" );
-            var Stratford            = tube.createStation( "Gloucester Road" );
-            var Stratford            = tube.createStation( "High Street Kensington" );
-            var Stratford            = tube.createStation( "Notting Hill Gate" );
-            var Stratford            = tube.createStation( "Bayswater" );
-            // var Stratford            = tube.createStation( "Paddington" );
-            // var Stratford            = tube.createStation( "Edgware Road" );
+            var Farringdon            = tube.createStation( "Farringdon" );
+            var Barbican            = tube.createStation( "Barbican" );
+            var Moorgate            = tube.createStation( "Moorgate" );
+            var LiverpoolStreet            = tube.createStation( "Liverpool Street" );
+            var Aldgate            = tube.createStation( "Aldgate" );
+            var TowerHill            = tube.createStation( "Tower Hill" );
+            var Monument            = tube.createStation( "Monument" );
+            var CannonStreet            = tube.createStation( "Cannon Street" );
+            var MansionHouse            = tube.createStation( "Mansion House" );
+            var Blackfriars            = tube.createStation( "Blackfriars" );
+            var Temple            = tube.createStation( "Temple" );
+            var Embankment            = tube.createStation( "Embankment" );
+            // var Westminster            = tube.createStation( "Westminster" );
+            var StJamesPark            = tube.createStation( "St James's Park" );
+            // var Victoria            = tube.createStation( "Victoria" );
+            var SloaneSquare            = tube.createStation( "Sloane Square" );
+            var SouthKensington            = tube.createStation( "South Kensington" );
+            var GloucesterRoad            = tube.createStation( "Gloucester Road" );
+            var HighStreetKensington            = tube.createStation( "High Street Kensington" );
+            var NottingHillGate            = tube.createStation( "Notting Hill Gate" );
+            var Bayswater            = tube.createStation( "Bayswater" );
+            // var Paddington            = tube.createStation( "Paddington" );
+            // var EdgwareRoad            = tube.createStation( "Edgware Road" );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //          Stations Piccadilly Line
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             
-            // var Stratford            = tube.createStation( "King's Cross" );
-            var Stratford            = tube.createStation( "Russell Square" );
-            var Stratford            = tube.createStation( "Holborn" );
-            var Stratford            = tube.createStation( "Covent Garden" );
-            var Stratford            = tube.createStation( "Leicester Square" );
-            var Stratford            = tube.createStation( "Piccadilly Circus" );
-            // var Stratford            = tube.createStation( "Green Park" );
-            var Stratford            = tube.createStation( "Hyde Park Corner" );
-            var Stratford            = tube.createStation( "Knightsbridge" );
-            // var Stratford            = tube.createStation( "Gloucester Road" );
+            // var KingsCross            = tube.createStation( "King's Cross" );
+            var RussellSquare            = tube.createStation( "Russell Square" );
+            var Holborn            = tube.createStation( "Holborn" );
+            var CoventGarden            = tube.createStation( "Covent Garden" );
+            var LeicesterSquare            = tube.createStation( "Leicester Square" );
+            var PiccadillyCircus            = tube.createStation( "Piccadilly Circus" );
+            // var GreenPark            = tube.createStation( "Green Park" );
+            var HydeParkCorner            = tube.createStation( "Hyde Park Corner" );
+            var Knightsbridge            = tube.createStation( "Knightsbridge" );
+            // var GloucesterRoad            = tube.createStation( "Gloucester Road" );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //          Stations Central Line
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // var Stratford            = tube.createStation( "Notting Hill Gate" );
-            var Stratford            = tube.createStation( "Queensway" );
-            var Stratford            = tube.createStation( "Lancaster Gate" );
-            var Stratford            = tube.createStation( "Marble Arch" );
-            // var Stratford            = tube.createStation( "Bond Street" );
-            // var Stratford            = tube.createStation( "Oxford Circus" );
-            var Stratford            = tube.createStation( "Tottenham Court Road" );
-            // var Stratford            = tube.createStation( "Holborn" );
-            var Stratford            = tube.createStation( "Chancery Lane" );
-            var Stratford            = tube.createStation( "St Paul's" );
-            var Stratford            = tube.createStation( "Bank" );
-            // var Stratford            = tube.createStation( "Liverpool Street" );
+            // var NottingHillGate            = tube.createStation( "Notting Hill Gate" );
+            var Queensway            = tube.createStation( "Queensway" );
+            var LancasterGate            = tube.createStation( "Lancaster Gate" );
+            var MarbleArch            = tube.createStation( "Marble Arch" );
+            // var BondStreet            = tube.createStation( "Bond Street" );
+            // var OxfordCircus            = tube.createStation( "Oxford Circus" );
+            var TottenhamCourtRoad            = tube.createStation( "Tottenham Court Road" );
+            // var Holborn            = tube.createStation( "Holborn" );
+            var ChanceryLane            = tube.createStation( "Chancery Lane" );
+            var StPauls            = tube.createStation( "St Paul's" );
+            var Bank            = tube.createStation( "Bank" );
+            // var LiverpoolStreet            = tube.createStation( "Liverpool Street" );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //          Stations Bakerloo Line
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             
-            // var Stratford            = tube.createStation( "Paddington" );
-            var Stratford            = tube.createStation( "Edgware Road" );
-            var Stratford            = tube.createStation( "Marylebone" );
+            // var Paddington            = tube.createStation( "Paddington" );
+            var EdgwareRoadBakerloo            = tube.createStation( "Edgware Road" );
+            var Marylebone            = tube.createStation( "Marylebone" );
             //var Stratford            = tube.createStation( "Baker Street" );
-            var Stratford            = tube.createStation( "Regent's Park" );
+            var RegentsPark            = tube.createStation( "Regent's Park" );
             // var Stratford            = tube.createStation( "Oxford Circus" );
             // var Stratford            = tube.createStation( "Piccadilly Circus" );
-            var Stratford            = tube.createStation( "Charing Cross" );
+            var CharingCross            = tube.createStation( "Charing Cross" );
             //var Stratford            = tube.createStation( "Embankment" );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -267,12 +183,12 @@ namespace Tutorial_9
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             
             // var Stratford            = tube.createStation( "Warren Street" );
-            var Stratford            = tube.createStation( "Goodge Street" );
+            var GoodgeStreet            = tube.createStation( "Goodge Street" );
             // var Stratford            = tube.createStation( "Tottenham Court Road" );
             // var Stratford            = tube.createStation( "Leicester Square" );
             // var Stratford            = tube.createStation( "Charing Cross" );
             // var Stratford            = tube.createStation( "Embankment" );
-             */
+             
             
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //          Stations Northern Line Charing Cross Branch
@@ -287,19 +203,80 @@ namespace Tutorial_9
             tube.addStationToLine(VictoriaSouthbound, Walthamstow);
             tube.addStationToLine(VictoriaSouthbound, BlackhorseRoad);
             tube.addStationToLine(VictoriaSouthbound, TottenhamHale);
-            // tube.addStationToLine(VictoriaSouthbound, SevenSisters);
+            tube.addStationToLine(VictoriaSouthbound, SevenSisters);
             tube.addStationToLine(VictoriaSouthbound, FinsburyPark);
-            // tube.addStationToLine(VictoriaSouthbound, HighburyIslington);
+            tube.addStationToLine(VictoriaSouthbound, HighburyIslington);
+            tube.addStationToLine(VictoriaSouthbound, KingsCross);
+            tube.addStationToLine(VictoriaSouthbound, Euston);
+            tube.addStationToLine(VictoriaSouthbound, WarrenStreet);
+            tube.addStationToLine(VictoriaSouthbound, OxfordCircus);
+            tube.addStationToLine(VictoriaSouthbound, GreenPark);
+            tube.addStationToLine(VictoriaSouthbound, Victoria);
+            tube.addStationToLine(VictoriaSouthbound, Pimlico);
+            tube.addStationToLine(VictoriaSouthbound, Vauxhall);
+            tube.addStationToLine(VictoriaSouthbound, Stockwell);
+            tube.addStationToLine(VictoriaSouthbound, Brixton);
 
-            // var VictoriaNorthbound = tube.createLine( LineName.Victoria, Direction.Northbound );
+            var VictoriaNorthbound = tube.createLine( LineName.Victoria, Direction.Northbound );
+
+            tube.addStationToLine(VictoriaNorthbound, Brixton);
+            tube.addStationToLine(VictoriaNorthbound, Stockwell);
+            tube.addStationToLine(VictoriaNorthbound, Vauxhall);
+            tube.addStationToLine(VictoriaNorthbound, Pimlico);
+            tube.addStationToLine(VictoriaNorthbound, Victoria);
+            tube.addStationToLine(VictoriaNorthbound, GreenPark);
+            tube.addStationToLine(VictoriaNorthbound, OxfordCircus);
+            tube.addStationToLine(VictoriaNorthbound, WarrenStreet);
+            tube.addStationToLine(VictoriaNorthbound, Euston);
+            tube.addStationToLine(VictoriaNorthbound, KingsCross);
+            tube.addStationToLine(VictoriaNorthbound, HighburyIslington);
+            tube.addStationToLine(VictoriaNorthbound, FinsburyPark);
+            tube.addStationToLine(VictoriaNorthbound, SevenSisters);
+            tube.addStationToLine(VictoriaNorthbound, TottenhamHale);
+            tube.addStationToLine(VictoriaNorthbound, BlackhorseRoad);
+            tube.addStationToLine(VictoriaNorthbound, Walthamstow);
             
-            // tube.addStationToLine(VictoriaNorthbound, HighburyIslington);
-            // tube.addStationToLine(VictoriaNorthbound, FinsburyPark);
-            // tube.addStationToLine(VictoriaNorthbound, SevenSisters);
-            // tube.addStationToLine(VictoriaNorthbound, TottenhamHale);
-            // tube.addStationToLine(VictoriaNorthbound, BlackhorseRoad);
-            // tube.addStationToLine(VictoriaNorthbound, Walthamstow);
+            
+            var PiccadillySouthbound = tube.createLine( LineName.Piccadilly, Direction.Southbound );
 
+            tube.addStationToLine(PiccadillySouthbound, KingsCross);
+            tube.addStationToLine(PiccadillySouthbound, RussellSquare);
+            tube.addStationToLine(PiccadillySouthbound, Holborn);
+            tube.addStationToLine(PiccadillySouthbound, CoventGarden);
+            tube.addStationToLine(PiccadillySouthbound, LeicesterSquare);
+            tube.addStationToLine(PiccadillySouthbound, PiccadillyCircus);
+            tube.addStationToLine(PiccadillySouthbound, GreenPark);
+            tube.addStationToLine(PiccadillySouthbound, HydeParkCorner);
+            tube.addStationToLine(PiccadillySouthbound, Knightsbridge);
+            tube.addStationToLine(PiccadillySouthbound, GloucesterRoad);
+
+            var PiccadillyNorthbound = tube.createLine( LineName.Piccadilly, Direction.Northbound );
+
+
+            tube.addStationToLine(PiccadillyNorthbound, GloucesterRoad);
+            tube.addStationToLine(PiccadillyNorthbound, Knightsbridge);
+            tube.addStationToLine(PiccadillyNorthbound, HydeParkCorner);
+            tube.addStationToLine(PiccadillyNorthbound, GreenPark);
+            tube.addStationToLine(PiccadillyNorthbound, PiccadillyCircus);
+            tube.addStationToLine(PiccadillyNorthbound, LeicesterSquare);
+            tube.addStationToLine(PiccadillyNorthbound, CoventGarden);
+            tube.addStationToLine(PiccadillyNorthbound, Holborn);
+            tube.addStationToLine(PiccadillyNorthbound, RussellSquare);
+            tube.addStationToLine(PiccadillyNorthbound, KingsCross);
+
+            
+            var CentralWestbound = tube.createLine( LineName.Central, Direction.Westbound );
+            var CentralEastbound = tube.createLine( LineName.Central, Direction.Eastbound );
+            var CircleClockwise = tube.createLine( LineName.Circle, Direction.Clockwise );
+            var CircleAnticlockwise = tube.createLine( LineName.Circle, Direction.Anticlockwise );
+            var NorthernSouthbound = tube.createLine( LineName.Northern, Direction.Southbound );
+            var NorthernNorthbound = tube.createLine( LineName.Northern, Direction.Northbound );
+            var BakerlooNorthbound = tube.createLine( LineName.Bakerloo, Direction.Northbound );
+            var BakerlooSouthbound = tube.createLine( LineName.Bakerloo, Direction.Southbound );
+            var NorthLondonWestbound = tube.createLine( LineName.NorthLondon, Direction.Westbound );
+            var NorthLondonEastbound = tube.createLine( LineName.NorthLondon, Direction.Eastbound );
+            var JubileeEastbound = tube.createLine( LineName.Jubilee, Direction.Eastbound );
+            var JubileeWestbound = tube.createLine( LineName.Jubilee, Direction.Westbound );
 
             
             
@@ -343,3 +320,9 @@ namespace Tutorial_9
         }
     }
 }
+
+// make cw ready
+// file neames , class names etc
+// 
+// linkedlist enumerator
+// 

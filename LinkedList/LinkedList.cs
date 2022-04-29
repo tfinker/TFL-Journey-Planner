@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 
-namespace Tutorial_9
+namespace LondonTube
 {
 
-    class LinkedList<T> {
+    class LinkedList<T> : ILinkedList<T>, IEnumerable {
       public LinkedListObject<T> Head {get;set;}
       public LinkedListObject<T> Tail {get;set;}
       public int Length {get;set;}
@@ -21,7 +21,7 @@ namespace Tutorial_9
 
       }
 
-      public void InsertAtHead(T data) {
+      public void InsertFirst(T data) {
         Head = new LinkedListObject<T>(data, null, Head);
         if (Head.Next != null)
           Head.Next.Previous = Head;
@@ -31,7 +31,7 @@ namespace Tutorial_9
         Length++;
       }
 
-      public void InsertAtTail(T data) {
+      public void InsertLast(T data) {
         Tail = new LinkedListObject<T>(data, Tail, null);
         if (Tail.Previous != null)
           Tail.Previous.Next = Tail;
@@ -39,16 +39,65 @@ namespace Tutorial_9
       }
 
       public void InsertAfterNode(LinkedListObject<T> node, T data) {
+
+        if (node == null){
+          throw new InvalidOperationException("Node can not be null");
+        }
+
         var newNode = new LinkedListObject<T>(data, node, node.Next);
-        if (node.Next != null)
+
+        if (node.Next != null) {
           node.Next.Previous = newNode;
+        }
+
         node.Next = newNode;
+
         if (newNode.Next == null) {
           Tail = newNode;
         }
+
         Length++;
       }
 
+
+      public void InsertAtIndex(T item, int index){
+
+        if (index > Length){
+           throw new IndexOutOfRangeException($"Index {index} more than Length {Length}");
+        }
+
+        if (index == 0){
+          InsertFirst(item);
+          return;
+        }
+        if (index == Length){
+          InsertLast(item);
+          return;
+        }
+      
+        InsertAfterNode(getItemAtIndex(index).Previous, item);
+
+      }
+
+      public LinkedListObject<T> getItemAtIndex(int index){
+
+        if (index >= Length){
+           throw new IndexOutOfRangeException($"Index {index} greater than number of nodes {Length-1}");
+        }
+        
+        var node = Head;
+        int i = 0;
+        while (node!=null){
+          if (i==index){
+            return node;
+          }
+          i++;
+          node=node.Next;
+        }
+
+        throw new InvalidOperationException($"Could not find index {index}");
+
+      }
 
       public LinkedListObject<T> findNode(T data){
         var node = Head;
@@ -60,7 +109,7 @@ namespace Tutorial_9
         return null;
       }
       
-      public void removeData(T data) {
+      public void RemoveItem(T data) {
         var node = findNode(data);
 
         if (node != null) {
@@ -81,40 +130,18 @@ namespace Tutorial_9
           
           Length--;
         }
-
       }
 
-      public LinkedListObject<T> removeHead(){
-        var returnObject = Head;
-        Head = Head.Next;
-        if (Head != null)
-          Head.Previous = null;
-        returnObject.Next = null;
-        Length--;
-
-        return returnObject;
+      IEnumerator IEnumerable.GetEnumerator()
+      {
+        return (IEnumerator) GetEnumerator();
       }
 
-
+      public LinkedListEnumerator<T> GetEnumerator() {
+        return new LinkedListEnumerator<T>(this);
+      }
 
     }
-    class LinkedListObject<T>
-    {
-        public T Data {get; set;}
-        public LinkedListObject<T> Previous {get; set;}
-        public LinkedListObject<T> Next {get; set;}
-       
 
-        public LinkedListObject(T data, LinkedListObject<T> previous, LinkedListObject<T> next) {
-          this.Data = data;
-          this.Previous = previous;
-          this.Next = next;
-        }
-
-        // public void Print()
-        // {
-        //     Console.WriteLine("AlO[ Source: " + Source.ToString() + ", Target: " + Target.ToString()  + ", Weight: " + Weight +" ]");
-        // }
-
-    } // AlObject	
+    
 }

@@ -1,8 +1,8 @@
 using System;
 
-namespace Tutorial_9 {
+namespace LondonTube {
 
-  interface IList<T> { //where T : IComparable<T> {
+  interface IList<T> {
 
     public void InsertFirst(T item);
     public void InsertLast(T item);

@@ -1,25 +1,8 @@
 using System;
 
 
-namespace Tutorial_9
+namespace LondonTube
 {
-
-    
-    class QueueObject : IComparable<QueueObject> {
-      public int Vertex {get;set;}
-      public int Distance {get;set;}
-
-      public QueueObject(int vertex, int distance){
-        Vertex = vertex;
-        Distance = distance;
-      }
-
-      public int CompareTo(QueueObject other){
-        if (other == null)
-          return 1;
-        return Distance.CompareTo(other.Distance);
-      }
-    }
     class ShortestPath
     {
       int startVertex;
@@ -40,29 +23,23 @@ namespace Tutorial_9
         for(int i=0;i<AdjList.numberOfVertices();i++){
           DistTo[i] = int.MaxValue;
         }
+
+        getShortestPaths();
+
       }
 
       public void getShortestPaths(){
 
         DistTo[startVertex] = 0;
-        queue.Enqueue(new QueueObject(startVertex, 0));
+        queue.Enqueue(new QueueObject(startVertex, DistTo[startVertex]));
         
         while( queue.Length > 0 ) {
-          
           var nearestVertex = (QueueObject) queue.Dequeue();
-          Console.WriteLine($"Next vertex {nearestVertex.Vertex}");
 
-          var edgeNode = AdjList.getEdgeList(nearestVertex.Vertex).Head;
-
-          while(edgeNode != null){
-            var edge = (Edge<int>) edgeNode.Data;
-            Console.WriteLine($"Relaxing vertex {edge.Target}");
+          foreach(var edge in AdjList.getEdgeList(nearestVertex.Vertex)){
             relaxEdge(edge);
-            edgeNode = edgeNode.Next;
           }
         }
-
-
       }
 
       public void printShortestPaths(){
@@ -72,10 +49,10 @@ namespace Tutorial_9
       }
 
       public Path<int> getShortestPathtoDestination(int destination){
-        getShortestPaths();
 
         var path = new Path<int>(startVertex, destination);
         
+        // work backwards through EdgeTo[] from destination to create a path from source to destination
         int index = destination;
         for( int i = 0; i< EdgeTo.Length;i++){
           var edge = EdgeTo[index];
@@ -90,17 +67,15 @@ namespace Tutorial_9
           }
         }
         return null;
-
-
       }
 
       private void relaxEdge(Edge<int> edge){
         if (DistTo[edge.Target] > DistTo[edge.Source] + edge.Weight) {
-          Console.WriteLine($"Distance {DistTo[edge.Source]+edge.Weight} from {edge.Source} to {edge.Target} is less than {DistTo[edge.Target]}");
+          //Console.WriteLine($"Distance {DistTo[edge.Source]+edge.Weight} from {edge.Source} to {edge.Target} is less than {DistTo[edge.Target]}");
           DistTo[edge.Target] = DistTo[edge.Source] + edge.Weight;
           EdgeTo[edge.Target] = edge;
           queue.Enqueue(new QueueObject(edge.Target, DistTo[edge.Target]));
-          Console.WriteLine($"Queueing {edge.Target} distance {DistTo[edge.Target]}");
+         // Console.WriteLine($"Queueing {edge.Target} distance {DistTo[edge.Target]}");
         }
       }
     }

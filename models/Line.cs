@@ -1,6 +1,6 @@
 using System;
 
-namespace Tutorial_9 {
+namespace LondonTube {
 
   enum Direction {
     Westbound,
@@ -37,7 +37,7 @@ namespace Tutorial_9 {
     }
 
     public void addStation(Station station) {
-      stations.InsertAtTail(station);
+      stations.InsertLast(station);
     }
 
     override public String ToString(){
