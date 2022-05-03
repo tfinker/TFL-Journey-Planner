@@ -22,10 +22,14 @@ namespace LondonTube {
 
     private void addPlatform(Platform platform){
       try {
-        platforms.getItemAtIndex(platform.ID);
+        // need to check that there isn't already an object at this index
+        // if no object at index, catch index error and continue
+        // if object at index, throw error
+        var existingPlatform = platforms.getItemAtIndex(platform.ID);
+        throw new InvalidOperationException($"There is already a platform at this index: {existingPlatform.ToString()}");
       }
       catch (IndexOutOfRangeException){
-        throw new InvalidOperationException($"Platform ID {platform.ID} clash");
+        // no existing platform at index, ok to add platform
       }
       platforms.InsertAtIndex(platform, platform.ID);
     }

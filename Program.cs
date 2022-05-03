@@ -291,29 +291,29 @@ namespace LondonTube
 
             tube.loadWeightedGraph("Tube");
 
-            // var path = tube.getShortestPath(Walthamstow, FinsburyPark);
-            // if (path != null){
-            //     tube.printPath(path);
-            // }
-            // tube.printGraph();
+            var path = tube.getShortestPath(Walthamstow, FinsburyPark);
+            if (path != null){
+                tube.printPath(path);
+            }
+            tube.printGraph();
 
-            // var closure = tube.CloseSectionOfTrack(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Leaves on track");
+            var closure = tube.CloseSectionOfTrack(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Leaves on track");
             
-            // tube.printGraph();
+            tube.printGraph();
 
-            // tube.ReopenSectionOfTrack(closure);
+            tube.ReopenSectionOfTrack(closure);
 
-            // tube.printGraph();
+            tube.printGraph();
 
-            // var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Hamsters", 2);
+            var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Hamsters", 2);
             
-            // tube.printGraph();
+            tube.printGraph();
 
-            // tube.ExpandDelay(delay, BlackhorseRoad, TottenhamHale, 2);
+            tube.ExpandDelay(delay, BlackhorseRoad, TottenhamHale, 2);
 
-            // tube.printGraph();
+            tube.printGraph();
 
-            // tube.RemoveDelay(delay);
+            tube.RemoveDelay(delay);
 
             // tube.printGraph();
 
@@ -321,8 +321,3 @@ namespace LondonTube
     }
 }
 
-// make cw ready
-// file neames , class names etc
-// 
-// linkedlist enumerator
-// 

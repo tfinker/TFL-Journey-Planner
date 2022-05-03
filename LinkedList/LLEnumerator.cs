@@ -13,9 +13,8 @@ namespace LondonTube{
       private LinkedList<T> linkedList;
       public LinkedListEnumerator(LinkedList<T> obj)
       {
-          Node = linkedList.Head;
-          linkedList = obj;
-          
+        linkedList = obj;
+        Node = linkedList.Head;
       }
 
       public bool MoveNext()
