@@ -29,13 +29,13 @@ namespace LondonTube
         }
 
         // add edge "(sV, dV)" to the graph
-        abstract public bool addEdge(int sourceVertex, int destinationVertex, int Weight) ;
+        abstract public bool addEdge(int sourceVertex, int destinationVertex, Double Weight) ;
 
         // remove edge "(sV, dV)" from the graph
         abstract public bool removeEdge(int sourceVertex, int destinationVertex) ;
 
         // modify edge "(sV, dV)" of the graph
-        abstract public bool modifyEdge(int sourceVertex, int destinationVertex, int weight) ;
+        abstract public bool modifyEdge(int sourceVertex, int destinationVertex, Double weight) ;
 
         // check if 2 vertices sV  dV are adjacent, i.e. neighbours   
         abstract public bool isAdjacent(int sourceVertex, int destinationVertex);

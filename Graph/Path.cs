@@ -9,7 +9,7 @@ namespace LondonTube
       public T startVertex;
       public T destination;
 
-      public int weight;
+      public Double weight;
 
       List<Edge<T>> edges;
 

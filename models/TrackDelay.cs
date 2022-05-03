@@ -44,8 +44,8 @@ namespace LondonTube {
       return delays.Head.Data.Connection.Source.Line;
     }
 
-    public int GetTotalDelay() {
-      int totalDelay =0;
+    public Double GetTotalDelay() {
+      Double totalDelay =0;
 
       foreach(var delay in delays) {
         totalDelay += delay.Time;

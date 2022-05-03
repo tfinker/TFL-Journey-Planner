@@ -6,9 +6,9 @@ namespace LondonTube
     {
         public T Source {get; set;}
         public T Target {get; set;}
-        public int Weight {get; set;}
+        public Double Weight {get; set;}
         
-        public Edge(T source, T target, int weight) {
+        public Edge(T source, T target, Double weight) {
           this.Source = source;
           this.Target = target;
           this.Weight = weight;

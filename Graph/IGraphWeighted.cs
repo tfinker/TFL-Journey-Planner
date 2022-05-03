@@ -9,11 +9,11 @@ namespace LondonTube
 
          int numberOfVertices();
 
-         bool addEdge(int srcVertex, int destVertex, int weight);
+         bool addEdge(int srcVertex, int destVertex, Double weight);
 
          bool removeEdge(int srcVertex, int destVertex);
 
-         bool modifyEdge(int srcVertex, int destVertex, int weight);
+         bool modifyEdge(int srcVertex, int destVertex, Double weight);
 
          bool isAdjacent(int srcVertex, int destVertex);
 

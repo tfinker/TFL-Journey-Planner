@@ -23,7 +23,7 @@ namespace LondonTube
             return (0 <= vertex & vertex <= numberOfVertices() - 1);
         }
 
-        override public bool addEdge(int sourceVertex, int destinationVertex, int weight)
+        override public bool addEdge(int sourceVertex, int destinationVertex, Double weight)
         {
             if ( validVertex(sourceVertex) & validVertex(destinationVertex) )
             {
@@ -82,7 +82,7 @@ namespace LondonTube
             }
         }
 
-        override public bool modifyEdge(int sourceVertex, int destinationVertex, int weight){
+        override public bool modifyEdge(int sourceVertex, int destinationVertex, Double weight){
           if (validVertex(sourceVertex) & validVertex(destinationVertex)) {
           
             foreach(var edge in getEdgeList(sourceVertex)) {
