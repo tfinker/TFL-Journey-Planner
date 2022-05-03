@@ -25,7 +25,7 @@ namespace LondonTube
         Head = new LinkedListObject<T>(data, null, Head);
         if (Head.Next != null)
           Head.Next.Previous = Head;
-        if (Head.Next == null) {
+        if (Tail == null) {
           Tail = Head;
         }
         Length++;
@@ -35,6 +35,9 @@ namespace LondonTube
         Tail = new LinkedListObject<T>(data, Tail, null);
         if (Tail.Previous != null)
           Tail.Previous.Next = Tail;
+        if (Head == null){
+          Head = Tail;
+        }
         Length++;
       }
 
@@ -70,12 +73,14 @@ namespace LondonTube
           InsertFirst(item);
           return;
         }
-        if (index == Length){
+        else if (index == Length){
           InsertLast(item);
           return;
         }
+        else {
+          InsertAfterNode(getItemAtIndex(index).Previous, item);
+        }
       
-        InsertAfterNode(getItemAtIndex(index).Previous, item);
 
       }
 
