@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/batman/.dotnet/store/|arch|/|tfm|",
-      "/home/batman/.nuget/packages"
+      "C:\\Users\\Glen Smith\\.dotnet\\store\\|arch|\\|tfm|",
+      "/home/batman/.nuget/packages/"
     ]
   }
 }
