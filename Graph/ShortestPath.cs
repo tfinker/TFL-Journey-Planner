@@ -7,7 +7,7 @@ namespace LondonTube
     {
       int startVertex;
       Edge<int>[] EdgeTo;
-      int[] DistTo;
+      Double[] DistTo;
       PriorityQueueHeap<QueueObject> queue;
 
       GraphAdjListWeighted AdjList;
@@ -15,7 +15,7 @@ namespace LondonTube
       public ShortestPath(GraphAdjListWeighted adjList, int startVertex) {
         AdjList = adjList;
         EdgeTo = new Edge<int>[AdjList.numberOfVertices()];
-        DistTo = new int[AdjList.numberOfVertices()];
+        DistTo = new Double[AdjList.numberOfVertices()];
         queue = new PriorityQueueHeap<QueueObject>();
         this.startVertex = startVertex;
 

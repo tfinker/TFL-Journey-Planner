@@ -280,9 +280,9 @@ namespace LondonTube
 
             
             
-            tube.createConnection(VictoriaSouthbound, Walthamstow, VictoriaSouthbound, BlackhorseRoad, 1, ModeType.Tube);
-            tube.createConnection(VictoriaSouthbound, BlackhorseRoad, VictoriaSouthbound, TottenhamHale, 1, ModeType.Tube);
-            tube.createConnection(VictoriaSouthbound, TottenhamHale, VictoriaSouthbound, FinsburyPark, 1, ModeType.Tube);
+            tube.createConnection(VictoriaSouthbound, Walthamstow, VictoriaSouthbound, BlackhorseRoad, 1.1, ModeType.Tube);
+            tube.createConnection(VictoriaSouthbound, BlackhorseRoad, VictoriaSouthbound, TottenhamHale, 1.5, ModeType.Tube);
+            tube.createConnection(VictoriaSouthbound, TottenhamHale, VictoriaSouthbound, FinsburyPark, 1.7, ModeType.Tube);
             
        //     tube.createConnection(VictoriaNorthbound, HighburyIslington, VictoriaNorthbound, FinsburyPark, 1, ModeType.Tube);
        //     tube.createConnection(VictoriaNorthbound, FinsburyPark, VictoriaNorthbound, SevenSisters, 1, ModeType.Tube);
@@ -305,11 +305,11 @@ namespace LondonTube
 
             tube.printGraph();
 
-            var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Hamsters", 2);
+            var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Hamsters", 2.6);
             
             tube.printGraph();
 
-            tube.ExpandDelay(delay, BlackhorseRoad, TottenhamHale, 2);
+            tube.ExpandDelay(delay, BlackhorseRoad, TottenhamHale, 3.9);
 
             tube.printGraph();
 

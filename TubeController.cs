@@ -53,7 +53,7 @@ namespace LondonTube {
       line.addStation(station);
     }
 
-    public void createConnection(Line sourceLine, Station source, Line targetLine, Station target, int time, ModeType mode){
+    public void createConnection(Line sourceLine, Station source, Line targetLine, Station target, double time, ModeType mode){
       var sourcePlatform = source.GetPlatform(sourceLine);
       var targetPlatform = target.GetPlatform(targetLine);
 
@@ -139,14 +139,14 @@ namespace LondonTube {
 
     public void printPath(Path<Platform> path) {
 
-        String getTimeString(int time){
+        String getTimeString(Double time){
           return $"{time} min" + (time > 1 ? "s" : "");
         }
         
         Console.WriteLine($"Path from {path.startVertex.Station.Name} to {path.destination.Station.Name}");
         Console.WriteLine($" - {path.startVertex.Line.Name}: {path.startVertex.Station.Name} ({path.startVertex.Line.Direction})");
         
-        int segmentTime=0;
+        Double segmentTime=0.0;
         foreach(Edge<Platform> edge in path.getPath()){
           var connection = edge.Source.getConnection(edge.Target);
 
@@ -240,7 +240,7 @@ namespace LondonTube {
       return connection;
     }
 
-    public TrackDelay AddDelayToLine(Line line, Station source, Station target, String reason, int time){
+    public TrackDelay AddDelayToLine(Line line, Station source, Station target, String reason, Double time){
       // user needs to add delays to specific connections between stations
       // any connections with a delay need to be added to a delay object
       // a delay object should contain all adjacent connections with a delay
@@ -264,7 +264,7 @@ namespace LondonTube {
     }
 
 
-    public void ExpandDelay(TrackDelay trackDelay, Station source, Station target, int time) {
+    public void ExpandDelay(TrackDelay trackDelay, Station source, Station target, Double time) {
 
       if ( time <= 0 ) {
         throw new InvalidOperationException("Delay time must be greater than zero");

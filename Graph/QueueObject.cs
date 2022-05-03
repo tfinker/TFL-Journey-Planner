@@ -5,9 +5,9 @@ namespace LondonTube
 {
     class QueueObject : IComparable<QueueObject> {
       public int Vertex {get;set;}
-      public int Distance {get;set;}
+      public Double Distance {get;set;}
 
-      public QueueObject(int vertex, int distance){
+      public QueueObject(int vertex, Double distance){
         Vertex = vertex;
         Distance = distance;
       }
