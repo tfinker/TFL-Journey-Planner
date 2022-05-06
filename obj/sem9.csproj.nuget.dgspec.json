@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/batman/Documents/uow/dsa/sem9/sem9.csproj": {}
+    "C:\\Users\\Glen Smith\\source\\repos\\DSA-Graphs\\sem9.csproj": {}
   },
   "projects": {
-    "/home/batman/Documents/uow/dsa/sem9/sem9.csproj": {
+    "C:\\Users\\Glen Smith\\source\\repos\\DSA-Graphs\\sem9.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/batman/Documents/uow/dsa/sem9/sem9.csproj",
+        "projectUniqueName": "C:\\Users\\Glen Smith\\source\\repos\\DSA-Graphs\\sem9.csproj",
         "projectName": "sem9",
-        "projectPath": "/home/batman/Documents/uow/dsa/sem9/sem9.csproj",
-        "packagesPath": "/home/batman/.nuget/packages/",
-        "outputPath": "/home/batman/Documents/uow/dsa/sem9/obj/",
+        "projectPath": "C:\\Users\\Glen Smith\\source\\repos\\DSA-Graphs\\sem9.csproj",
+        "packagesPath": "C:\\Users\\Glen Smith\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Glen Smith\\source\\repos\\DSA-Graphs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/batman/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Glen Smith\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -52,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.404/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -133,8 +133,8 @@ namespace LondonTube
             var HighStreetKensington = tube.createStation( "High Street Kensington" );
             var NottingHillGate     = tube.createStation( "Notting Hill Gate" );
             var Bayswater           = tube.createStation( "Bayswater" );
-            // var Paddington       = tube.createStation( "Paddington" );
-            // var EdgwareRoad      = tube.createStation( "Edgware Road" );
+             var PaddingtonHC       = tube.createStation( "Paddington H&C" );
+             var EdgwareRoadHC      = tube.createStation( "Edgware Road H&C" );
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Piccadilly Line
@@ -361,8 +361,8 @@ namespace LondonTube
             tube.addStationToLine(CircleClockwise, HighStreetKensington);
             tube.addStationToLine(CircleClockwise, NottingHillGate);
             tube.addStationToLine(CircleClockwise, Bayswater);
-            tube.addStationToLine(CircleClockwise, Paddington);
-            tube.addStationToLine(CircleClockwise, EdgwareRoad);
+            tube.addStationToLine(CircleClockwise, PaddingtonHC);
+            tube.addStationToLine(CircleClockwise, EdgwareRoadHC);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Add Stations to Anti Clockwise Circle Line
@@ -370,8 +370,8 @@ namespace LondonTube
 
             var CircleAnticlockwise = tube.createLine( LineName.Circle, Direction.Anticlockwise );
 
-            tube.addStationToLine(CircleAnticlockwise, EdgwareRoad );
-            tube.addStationToLine(CircleAnticlockwise, Paddington);
+            tube.addStationToLine(CircleAnticlockwise, EdgwareRoadHC );
+            tube.addStationToLine(CircleAnticlockwise, PaddingtonHC);
             tube.addStationToLine(CircleAnticlockwise, Bayswater);
             tube.addStationToLine(CircleAnticlockwise, NottingHillGate);
             tube.addStationToLine(CircleAnticlockwise, HighStreetKensington);
@@ -573,7 +573,22 @@ namespace LondonTube
             tube.createConnection(VictoriaSouthbound, Pimlico, VictoriaSouthbound, Vauxhall, 1.40, ModeType.Tube);
             tube.createConnection(VictoriaSouthbound, Vauxhall, VictoriaSouthbound, Stockwell, 2.30, ModeType.Tube);
             tube.createConnection(VictoriaSouthbound, Stockwell, VictoriaSouthbound, Brixton, 2.03, ModeType.Tube);
-
+            tube.createConnection(VictoriaSouthbound, FinsburyPark, PiccadillyNorthbound, FinsburyPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, FinsburyPark, PiccadillySouthbound, FinsburyPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, KingsCross, PiccadillyNorthbound, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, KingsCross, PiccadillySouthbound, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, WarrenStreet, NorthernNorthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, WarrenStreet, NorthernSouthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, OxfordCircus, BakerlooSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, OxfordCircus, CentralEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, OxfordCircus, CentralWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, GreenPark, PiccadillyNorthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, GreenPark, PiccadillySouthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, GreenPark, JubileeWestbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, GreenPark, JubileeEastbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, Victoria, CircleAnticlockwise, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaSouthbound, Victoria, CircleClockwise, Victoria, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Northbound Victoria Line Connections
@@ -594,12 +609,27 @@ namespace LondonTube
             tube.createConnection(VictoriaNorthbound, SevenSisters, VictoriaNorthbound, TottenhamHale, 1.60, ModeType.Tube);
             tube.createConnection(VictoriaNorthbound, TottenhamHale, VictoriaNorthbound, BlackhorseRoad, 1.97, ModeType.Tube);
             tube.createConnection(VictoriaNorthbound, BlackhorseRoad, VictoriaNorthbound, Walthamstow, 2.12, ModeType.Tube);
+            tube.createConnection(VictoriaNorthbound, FinsburyPark, PiccadillyNorthbound, FinsburyPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, FinsburyPark, PiccadillySouthbound, FinsburyPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, KingsCross, PiccadillyNorthbound, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, KingsCross, PiccadillySouthbound, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, WarrenStreet, NorthernNorthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, WarrenStreet, NorthernSouthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, OxfordCircus, BakerlooSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, OxfordCircus, CentralEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, OxfordCircus, CentralWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, GreenPark, PiccadillyNorthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, GreenPark, PiccadillySouthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, GreenPark, JubileeWestbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, GreenPark, JubileeEastbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, Victoria, CircleAnticlockwise, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(VictoriaNorthbound, Victoria, CircleClockwise, Victoria, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Southbound Picadilly Line Connections
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            //GS Westbound
 
             tube.createConnection(PiccadillySouthbound, KingsCross, PiccadillySouthbound, RussellSquare, 1.67, ModeType.Tube);
             tube.createConnection(PiccadillySouthbound, RussellSquare, PiccadillySouthbound, Holborn, 1.37, ModeType.Tube);
@@ -611,7 +641,20 @@ namespace LondonTube
             tube.createConnection(PiccadillySouthbound, HydeParkCorner, PiccadillySouthbound, Knightsbridge, 1.12, ModeType.Tube);
             tube.createConnection(PiccadillySouthbound, Knightsbridge, PiccadillySouthbound, SouthKensington, 2.23, ModeType.Tube);
             tube.createConnection(PiccadillySouthbound, SouthKensington, PiccadillySouthbound, GloucesterRoad, 1.37, ModeType.Tube);
-
+            tube.createConnection(PiccadillySouthbound, KingsCross, CircleClockwise, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, KingsCross, CircleAnticlockwise, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, Holborn, CentralEastbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, Holborn, CentralWestbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, LeicesterSquare, NorthernNorthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, LeicesterSquare, NorthernSouthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, PiccadillyCircus, BakerlooNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, PiccadillyCircus, BakerlooSouthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, PiccadillyCircus, BakerlooNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, GreenPark, JubileeWestbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, GreenPark, JubileeEastbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, GreenPark, VictoriaNorthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillySouthbound, GreenPark, VictoriaSouthbound, GreenPark, 2.00, ModeType.Interchange);
+            
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Northbound Picadilly Line Connections
@@ -629,6 +672,19 @@ namespace LondonTube
             tube.createConnection(PiccadillyNorthbound, CoventGarden, PiccadillyNorthbound, Holborn, 1.40, ModeType.Tube);
             tube.createConnection(PiccadillyNorthbound, Holborn, PiccadillyNorthbound, RussellSquare, 1.55, ModeType.Tube);
             tube.createConnection(PiccadillyNorthbound, RussellSquare, PiccadillyNorthbound, KingsCross, 1.90, ModeType.Tube);
+            tube.createConnection(PiccadillyNorthbound, KingsCross, CircleClockwise, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, KingsCross, CircleAnticlockwise, KingsCross, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, Holborn, CentralEastbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, Holborn, CentralWestbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, LeicesterSquare, NorthernNorthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, LeicesterSquare, NorthernSouthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, PiccadillyCircus, BakerlooNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, PiccadillyCircus, BakerlooSouthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, PiccadillyCircus, BakerlooNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, GreenPark, JubileeWestbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, GreenPark, JubileeEastbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, GreenPark, VictoriaNorthbound, GreenPark, 2.00, ModeType.Interchange);
+            tube.createConnection(PiccadillyNorthbound, GreenPark, VictoriaSouthbound, GreenPark, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Westbound Central Line Connections
@@ -645,6 +701,22 @@ namespace LondonTube
             tube.createConnection(CentralWestbound, MarbleArch, CentralWestbound, LancasterGate, 1.62, ModeType.Tube);
             tube.createConnection(CentralWestbound, LancasterGate, CentralWestbound, Queensway, 1.65, ModeType.Tube);
             tube.createConnection(CentralWestbound, Queensway, CentralWestbound, NottingHillGate, 1.18, ModeType.Tube);
+            tube.createConnection(CentralWestbound, LiverpoolStreet, CircleAnticlockwise, LiverpoolStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, LiverpoolStreet, CircleClockwise, LiverpoolStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, Bank, CircleAnticlockwise, Bank, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, Bank, CircleClockwise, Bank, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, Holborn, PiccadillyNorthbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, Holborn, PiccadillySouthbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, TottenhamCourtRoad, NorthernNorthbound, TottenhamCourtRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, TottenhamCourtRoad, NorthernSouthbound, TottenhamCourtRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, OxfordCircus, VictoriaNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, OxfordCircus, VictoriaSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, BondStreet, JubileeWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, BondStreet, JubileeEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, NottingHillGate, CircleAnticlockwise, NottingHillGate, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralWestbound, NottingHillGate, CircleClockwise, NottingHillGate, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Eastbound Central Line Connections
@@ -661,6 +733,22 @@ namespace LondonTube
             tube.createConnection(CentralEastbound, ChanceryLane, CentralEastbound, StPauls, 1.52, ModeType.Tube);
             tube.createConnection(CentralEastbound, StPauls, CentralEastbound, Bank, 1.62, ModeType.Tube);
             tube.createConnection(CentralEastbound, Bank, CentralEastbound, LiverpoolStreet, 1.62, ModeType.Tube);
+            tube.createConnection(CentralEastbound, LiverpoolStreet, CircleAnticlockwise, LiverpoolStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, LiverpoolStreet, CircleClockwise, LiverpoolStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, Bank, CircleAnticlockwise, Bank, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, Bank, CircleClockwise, Bank, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, Holborn, PiccadillyNorthbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, Holborn, PiccadillySouthbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, TottenhamCourtRoad, NorthernNorthbound, TottenhamCourtRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, TottenhamCourtRoad, NorthernSouthbound, TottenhamCourtRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, OxfordCircus, VictoriaNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, OxfordCircus, VictoriaSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, OxfordCircus, BakerlooNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, BondStreet, JubileeWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, BondStreet, JubileeEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, NottingHillGate, CircleAnticlockwise, NottingHillGate, 2.00, ModeType.Interchange);
+            tube.createConnection(CentralEastbound, NottingHillGate, CircleClockwise, NottingHillGate, 2.00, ModeType.Interchange);
             
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -702,14 +790,28 @@ namespace LondonTube
             tube.createConnection(CircleClockwise, HighStreetKensington, CircleClockwise, NottingHillGate, 1.68, ModeType.Tube);
             tube.createConnection(CircleClockwise, NottingHillGate, CircleClockwise, Bayswater, 1.77, ModeType.Tube);
             tube.createConnection(CircleClockwise, Bayswater, CircleClockwise, Paddington, 1.63, ModeType.Tube);
-            tube.createConnection(CircleClockwise, Paddington, CircleClockwise, EdgwareRoad, 2.15, ModeType.Tube);
+            tube.createConnection(CircleClockwise, PaddingtonHC, CircleClockwise, EdgwareRoadHC, 2.15, ModeType.Tube);
+            tube.createConnection(CircleClockwise, BakerStreet, JubileeWestbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, BakerStreet, JubileeEastbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, BakerStreet, BakerlooNorthbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, BakerStreet, BakerlooSouthbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, Westminster, JubileeWestbound, Westminster, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, Westminster, JubileeEastbound, Westminster, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, Victoria, VictoriaNorthbound, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, Victoria, VictoriaSouthbound, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, GloucesterRoad, PiccadillyNorthbound, GloucesterRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, GloucesterRoad, PiccadillySouthbound, GloucesterRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, NottingHillGate, CentralEastbound, NottingHillGate, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleClockwise, NottingHillGate, CentralWestbound, NottingHillGate, 2.00, ModeType.Interchange);
+
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Anti Clockwise Circle Line Connections
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            tube.createConnection(CircleAnticlockwise, EdgwareRoad, CircleAnticlockwise, Paddington, 1.85, ModeType.Tube);
-            tube.createConnection(CircleAnticlockwise, Paddington, CircleAnticlockwise, Bayswater, 1.65, ModeType.Tube);
+            tube.createConnection(CircleAnticlockwise, EdgwareRoadHC, CircleAnticlockwise, Paddington, 1.85, ModeType.Tube);
+            tube.createConnection(CircleAnticlockwise, PaddingtonHC, CircleAnticlockwise, Bayswater, 1.65, ModeType.Tube);
             tube.createConnection(CircleAnticlockwise, Bayswater, CircleAnticlockwise, NottingHillGate, 1.47, ModeType.Tube);
             tube.createConnection(CircleAnticlockwise, NottingHillGate, CircleAnticlockwise, HighStreetKensington, 1.58, ModeType.Tube);
             tube.createConnection(CircleAnticlockwise, HighStreetKensington, CircleAnticlockwise, GloucesterRoad, 1.80, ModeType.Tube);
@@ -744,6 +846,18 @@ namespace LondonTube
             tube.createConnection(CircleAnticlockwise, WoodLane, CircleAnticlockwise, ShepherdsBushMarket, 1.50, ModeType.Tube);
             tube.createConnection(CircleAnticlockwise, ShepherdsBushMarket, CircleAnticlockwise, GoldHawkRoad, 1.15, ModeType.Tube);
             tube.createConnection(CircleAnticlockwise, GoldHawkRoad, CircleAnticlockwise, Hammersmith, 2.43, ModeType.Tube);
+            tube.createConnection(CircleAnticlockwise, BakerStreet, JubileeWestbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, BakerStreet, JubileeEastbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, BakerStreet, BakerlooNorthbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, BakerStreet, BakerlooSouthbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, Westminster, JubileeWestbound, Westminster, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, Westminster, JubileeEastbound, Westminster, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, Victoria, VictoriaNorthbound, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, Victoria, VictoriaSouthbound, Victoria, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, GloucesterRoad, PiccadillyNorthbound, GloucesterRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, GloucesterRoad, PiccadillySouthbound, GloucesterRoad, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, NottingHillGate, CentralEastbound, NottingHillGate, 2.00, ModeType.Interchange);
+            tube.createConnection(CircleAnticlockwise, NottingHillGate, CentralWestbound, NottingHillGate, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Southbound Northern Line Connections
@@ -754,31 +868,61 @@ namespace LondonTube
             tube.createConnection(NorthernSouthbound, TottenhamCourtRoad, NorthernSouthbound, LeicesterSquare, 0.98, ModeType.Tube);
             tube.createConnection(NorthernSouthbound, LeicesterSquare, NorthernSouthbound, CharingCross, 1.20, ModeType.Tube);
             tube.createConnection(NorthernSouthbound, CharingCross, NorthernSouthbound, Embankment, 0.80, ModeType.Tube);
-            tube.createConnection(NorthernSouthbound, Embankment, NorthernSouthbound, Waterloo, 1.37, ModeType.Tube);
+            //tube.createConnection(NorthernSouthbound, Embankment, NorthernSouthbound, Waterloo, 1.37, ModeType.Tube);
+            tube.createConnection(NorthernSouthbound, WarrenStreet, VictoriaNorthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, WarrenStreet, VictoriaSouthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, Holborn, CentralEastbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, Holborn, CentralWestbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, LeicesterSquare, PiccadillyNorthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, LeicesterSquare, PiccadillySouthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, CharingCross, BakerlooNorthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernSouthbound, CharingCross, BakerlooSouthbound, CharingCross, 2.00, ModeType.Interchange);
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //           Stations Northbound Northern Line
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            tube.createConnection(NorthernNorthbound, Waterloo, NorthernNorthbound, Embankment, 1.40, ModeType.Tube);
+            //tube.createConnection(NorthernNorthbound, Waterloo, NorthernNorthbound, Embankment, 1.40, ModeType.Tube);
             tube.createConnection(NorthernNorthbound, Embankment, NorthernNorthbound, CharingCross, 0.87, ModeType.Tube);
             tube.createConnection(NorthernNorthbound, CharingCross, NorthernNorthbound, LeicesterSquare, 1.17, ModeType.Tube);
             tube.createConnection(NorthernNorthbound, LeicesterSquare, NorthernNorthbound, TottenhamCourtRoad, 1.03, ModeType.Tube);
             tube.createConnection(NorthernNorthbound, TottenhamCourtRoad, NorthernNorthbound, GoodgeStreet, 1.28, ModeType.Tube);
             tube.createConnection(NorthernNorthbound, GoodgeStreet, NorthernNorthbound, WarrenStreet, 1.07, ModeType.Tube);
+            tube.createConnection(NorthernNorthbound, WarrenStreet, VictoriaNorthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, WarrenStreet, VictoriaSouthbound, WarrenStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, Holborn, CentralEastbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, Holborn, CentralWestbound, Holborn, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, LeicesterSquare, PiccadillyNorthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, LeicesterSquare, PiccadillySouthbound, LeicesterSquare, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, CharingCross, BakerlooNorthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(NorthernNorthbound, CharingCross, BakerlooSouthbound, CharingCross, 2.00, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Southbound Bakerloo Line Connections
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            tube.createConnection(BakerlooSouthbound, Paddington, BakerlooSouthbound, EdgwareRoad, 1.57, ModeType.Tube);
-            tube.createConnection(BakerlooSouthbound, EdgwareRoad, BakerlooSouthbound, Marylebone, 1.12, ModeType.Tube);
-            tube.createConnection(BakerlooSouthbound, Marylebone, BakerlooSouthbound, BakerStreet, 1.17, ModeType.Tube);
+            //tube.createConnection(BakerlooSouthbound, Paddington, BakerlooSouthbound, EdgwareRoad, 1.57, ModeType.Tube);
+            //tube.createConnection(BakerlooSouthbound, EdgwareRoad, BakerlooSouthbound, Marylebone, 1.12, ModeType.Tube);
+            //tube.createConnection(BakerlooSouthbound, Marylebone, BakerlooSouthbound, BakerStreet, 1.17, ModeType.Tube);
             tube.createConnection(BakerlooSouthbound, BakerStreet, BakerlooSouthbound, RegentsPark, 1.68, ModeType.Tube);
             tube.createConnection(BakerlooSouthbound, RegentsPark, BakerlooSouthbound, OxfordCircus, 1.85, ModeType.Tube);
             tube.createConnection(BakerlooSouthbound, OxfordCircus, BakerlooSouthbound, PiccadillyCircus, 1.95, ModeType.Tube);
             tube.createConnection(BakerlooSouthbound, PiccadillyCircus, BakerlooSouthbound, CharingCross, 0.95, ModeType.Tube);
             tube.createConnection(BakerlooSouthbound, CharingCross, BakerlooSouthbound, Embankment, 1.43, ModeType.Tube);
+            tube.createConnection(BakerlooSouthbound, BakerStreet, JubileeWestbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, BakerStreet, JubileeEastbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, OxfordCircus, VictoriaNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, OxfordCircus, VictoriaSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, OxfordCircus, CentralEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, OxfordCircus, CentralWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, PiccadillyCircus, PiccadillyNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, PiccadillyCircus, PiccadillySouthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, CharingCross, NorthernNorthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, CharingCross, NorthernSouthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, Embankment, CircleAnticlockwise, Embankment, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooSouthbound, Embankment, CircleClockwise, Embankment, 2.00, ModeType.Interchange);
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Northbound Bakerloo Line Connections
@@ -792,61 +936,81 @@ namespace LondonTube
             tube.createConnection(BakerlooNorthbound, BakerStreet, BakerlooNorthbound, Marylebone, 1.08, ModeType.Tube);
             tube.createConnection(BakerlooNorthbound, Marylebone, BakerlooNorthbound, EdgwareRoad, 1.08, ModeType.Tube);
             tube.createConnection(BakerlooNorthbound, EdgwareRoad, BakerlooNorthbound, Paddington, 1.62, ModeType.Tube);
+            tube.createConnection(BakerlooNorthbound, BakerStreet, JubileeWestbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, BakerStreet, JubileeEastbound, BakerStreet, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, OxfordCircus, VictoriaNorthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, OxfordCircus, VictoriaSouthbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, OxfordCircus, CentralEastbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, OxfordCircus, CentralWestbound, OxfordCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, PiccadillyCircus, PiccadillyNorthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, PiccadillyCircus, PiccadillySouthbound, PiccadillyCircus, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, CharingCross, NorthernNorthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, CharingCross, NorthernSouthbound, CharingCross, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, Embankment, CircleAnticlockwise, Embankment, 2.00, ModeType.Interchange);
+            tube.createConnection(BakerlooNorthbound, Embankment, CircleClockwise, Embankment, 2.00, ModeType.Interchange);
 
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Eastbound North London Line Connections
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             
-            tube.createConnection(NorthLondonEastbound, Richmond, NorthLondonEastbound, KewGardens, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, KewGardens, NorthLondonEastbound, Gunnersbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, Gunnersbury, NorthLondonEastbound, SouthActon, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, SouthActon, NorthLondonEastbound, ActonCentral, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, ActonCentral, NorthLondonEastbound, WillesdenJunction, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, WillesdenJunction, NorthLondonEastbound, KensalRise, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, KensalRise, NorthLondonEastbound, BrondesburyPark, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, BrondesburyPark, NorthLondonEastbound, Brondesbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, Brondesbury, NorthLondonEastbound, WestHampstead, 1, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, Richmond, NorthLondonEastbound, KewGardens, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, KewGardens, NorthLondonEastbound, Gunnersbury, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, Gunnersbury, NorthLondonEastbound, SouthActon, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, SouthActon, NorthLondonEastbound, ActonCentral, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, ActonCentral, NorthLondonEastbound, WillesdenJunction, 5, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, WillesdenJunction, NorthLondonEastbound, KensalRise, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, KensalRise, NorthLondonEastbound, BrondesburyPark, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, BrondesburyPark, NorthLondonEastbound, Brondesbury, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, Brondesbury, NorthLondonEastbound, WestHampstead, 2, ModeType.Tube);
             tube.createConnection(NorthLondonEastbound, WestHampstead, NorthLondonEastbound, FinchleyRoadFrognal, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, FinchleyRoadFrognal, NorthLondonEastbound, HampsteadHeath, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, HampsteadHeath, NorthLondonEastbound, GospelOak, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, GospelOak, NorthLondonEastbound, KentishTownWest, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, KentishTownWest, NorthLondonEastbound, CamdenRoad, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, CamdenRoad, NorthLondonEastbound, CaledonianRoadBarnsbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, CaledonianRoadBarnsbury, NorthLondonEastbound, HighburyIslington, 1, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, FinchleyRoadFrognal, NorthLondonEastbound, HampsteadHeath, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, HampsteadHeath, NorthLondonEastbound, GospelOak, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, GospelOak, NorthLondonEastbound, KentishTownWest, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, KentishTownWest, NorthLondonEastbound, CamdenRoad, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, CamdenRoad, NorthLondonEastbound, CaledonianRoadBarnsbury, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, CaledonianRoadBarnsbury, NorthLondonEastbound, HighburyIslington, 3, ModeType.Tube);
             tube.createConnection(NorthLondonEastbound, HighburyIslington, NorthLondonEastbound, Canonbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, Canonbury, NorthLondonEastbound, DalstonKingsland, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, DalstonKingsland, NorthLondonEastbound, HackneyCentral, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, HackneyCentral, NorthLondonEastbound, Homerton, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, Homerton, NorthLondonEastbound, HackneyWick, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonEastbound, HackneyWick, NorthLondonEastbound, Stratford, 1, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, Canonbury, NorthLondonEastbound, DalstonKingsland, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, DalstonKingsland, NorthLondonEastbound, HackneyCentral, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, HackneyCentral, NorthLondonEastbound, Homerton, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, Homerton, NorthLondonEastbound, HackneyWick, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, HackneyWick, NorthLondonEastbound, Stratford, 7, ModeType.Tube);
+            tube.createConnection(NorthLondonEastbound, WestHampstead, JubileeWestbound, WestHampstead, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonEastbound, WestHampstead, JubileeEastbound, WestHampstead, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonEastbound, HighburyIslington, VictoriaNorthbound, HighburyIslington, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonEastbound, HighburyIslington, VictoriaSouthbound, HighburyIslington, 2, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Westbound North London Line Connections
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            tube.createConnection(NorthLondonWestbound, Stratford, NorthLondonWestbound, HackneyWick, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, HackneyWick, NorthLondonWestbound, Homerton, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, Homerton, NorthLondonWestbound, HackneyCentral, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, HackneyCentral, NorthLondonWestbound, DalstonKingsland, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, DalstonKingsland, NorthLondonWestbound, Canonbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, Canonbury, NorthLondonWestbound, HighburyIslington, 1, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, Stratford, NorthLondonWestbound, HackneyWick, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, HackneyWick, NorthLondonWestbound, Homerton, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, Homerton, NorthLondonWestbound, HackneyCentral, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, HackneyCentral, NorthLondonWestbound, DalstonKingsland, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, DalstonKingsland, NorthLondonWestbound, Canonbury, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, Canonbury, NorthLondonWestbound, HighburyIslington, 3, ModeType.Tube);
             tube.createConnection(NorthLondonWestbound, HighburyIslington, NorthLondonWestbound, CaledonianRoadBarnsbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, CaledonianRoadBarnsbury, NorthLondonWestbound, CamdenRoad, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, CamdenRoad, NorthLondonWestbound, KentishTownWest, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, KentishTownWest, NorthLondonWestbound, GospelOak, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, GospelOak, NorthLondonWestbound, HampsteadHeath, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, HampsteadHeath, NorthLondonWestbound, FinchleyRoadFrognal, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, FinchleyRoadFrognal, FinchleyRoadFrognal, WestHampstead, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, WestHampstead, NorthLondonWestbound, Brondesbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, Brondesbury, NorthLondonWestbound, BrondesburyPark, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, BrondesburyPark, NorthLondonWestbound, KensalRise, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, KensalRise, NorthLondonWestbound, WillesdenJunction, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, WillesdenJunction, NorthLondonWestbound, ActonCentral, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, ActonCentral, NorthLondonWestbound, SouthActon, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, SouthActon, NorthLondonWestbound, Gunnersbury, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, Gunnersbury, NorthLondonWestbound, KewGardens, 1, ModeType.Tube);
-            tube.createConnection(NorthLondonWestbound, KewGardens, NorthLondonWestbound, Richmond, 1, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, CaledonianRoadBarnsbury, NorthLondonWestbound, CamdenRoad, 4, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, CamdenRoad, NorthLondonWestbound, KentishTownWest, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, KentishTownWest, NorthLondonWestbound, GospelOak, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, GospelOak, NorthLondonWestbound, HampsteadHeath, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, HampsteadHeath, NorthLondonWestbound, FinchleyRoadFrognal, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, FinchleyRoadFrognal, NorthLondonWestbound, WestHampstead, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, WestHampstead, NorthLondonWestbound, Brondesbury, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, Brondesbury, NorthLondonWestbound, BrondesburyPark, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, BrondesburyPark, NorthLondonWestbound, KensalRise, 2, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, KensalRise, NorthLondonWestbound, WillesdenJunction, 4, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, WillesdenJunction, NorthLondonWestbound, ActonCentral, 5, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, ActonCentral, NorthLondonWestbound, SouthActon, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, SouthActon, NorthLondonWestbound, Gunnersbury, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, Gunnersbury, NorthLondonWestbound, KewGardens, 3, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, KewGardens, NorthLondonWestbound, Richmond, 4, ModeType.Tube);
+            tube.createConnection(NorthLondonWestbound, WestHampstead, JubileeWestbound, WestHampstead, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonWestbound, WestHampstead, JubileeEastbound, WestHampstead, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonWestbound, HighburyIslington, VictoriaNorthbound, HighburyIslington, 2, ModeType.Interchange);
+            tube.createConnection(NorthLondonWestbound, HighburyIslington, VictoriaSouthbound, HighburyIslington, 2, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Eastbound Jubilee Line Connections
@@ -856,6 +1020,16 @@ namespace LondonTube
             tube.createConnection(JubileeEastbound, BondStreet, JubileeEastbound, GreenPark, 1.78, ModeType.Tube);
             tube.createConnection(JubileeEastbound, GreenPark, JubileeEastbound, Westminster, 1.87, ModeType.Tube);
             tube.createConnection(JubileeEastbound, Westminster, JubileeEastbound, Waterloo, 1.38, ModeType.Tube);
+            tube.createConnection(JubileeEastbound, BakerStreet, BakerlooNorthbound, BakerStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, BakerStreet, BakerlooSouthbound, BakerStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, BondStreet, CentralEastbound, BondStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, BondStreet, CentralWestbound, BondStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, GreenPark, VictoriaNorthbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, GreenPark, VictoriaSouthbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, GreenPark, CentralEastbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, GreenPark, CentralWestbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, Westminster, CircleAnticlockwise, Westminster, 2, ModeType.Interchange);
+            tube.createConnection(JubileeEastbound, Westminster, CircleClockwise, Westminster, 2, ModeType.Interchange);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          Stations Westbound Jubilee Line Connections
@@ -865,9 +1039,17 @@ namespace LondonTube
             tube.createConnection(JubileeWestbound, Westminster, JubileeWestbound, GreenPark, 1.82, ModeType.Tube);
             tube.createConnection(JubileeWestbound, GreenPark, JubileeWestbound, BondStreet, 1.82, ModeType.Tube);
             tube.createConnection(JubileeWestbound, BondStreet, JubileeWestbound, BakerStreet, 2.28, ModeType.Tube);
+            tube.createConnection(JubileeWestbound, BakerStreet, BakerlooNorthbound, BakerStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, BakerStreet, BakerlooSouthbound, BakerStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, BondStreet, CentralEastbound, BondStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, BondStreet, CentralWestbound, BondStreet, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, GreenPark, VictoriaNorthbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, GreenPark, VictoriaSouthbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, GreenPark, CentralEastbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, GreenPark, CentralWestbound, GreenPark, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, Westminster, CircleAnticlockwise, Westminster, 2, ModeType.Interchange);
+            tube.createConnection(JubileeWestbound, Westminster, CircleClockwise, Westminster, 2, ModeType.Interchange);
 
-            // TO DO : Add in interchanges and add in lines which intersect other lines
-            // CONFIRM TIMES ON NORTH OVERGROUND LINE
 
             tube.PrintModel();
 
@@ -898,6 +1080,10 @@ namespace LondonTube
             tube.RemoveDelay(delay);
 
             // tube.printGraph();
+
+            Menu menu = new Menu(tube);
+
+            menu.mainMenu();
 
         }
     }

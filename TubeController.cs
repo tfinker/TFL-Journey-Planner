@@ -18,8 +18,7 @@ namespace LondonTube {
       closures = new List<TrackClosure>();
       delays = new List<TrackDelay>();
     }
-
-
+    
     private void addPlatform(Platform platform){
       try {
         // need to check that there isn't already an object at this index
@@ -293,6 +292,21 @@ namespace LondonTube {
       delays.RemoveItem(trackDelay);
 
     }
-  }
-
-}  
+        public List<Station> getStations()
+        {
+            return stations;
+        }
+        public List<TrackClosure> getClosures()
+        {
+            return closures;
+        }
+        public List<TrackDelay> getDelays()
+        {
+            return delays;
+        }
+        public List<Line> getLines()
+        {
+            return lines;
+        }
+    }
+} 
