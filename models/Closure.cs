@@ -34,6 +34,13 @@ namespace LondonTube {
       return elements;
     }
 
+    override public String ToString(){
+      var str = String.Format("Track closure between {0} and {1}",
+          elements.Head.Data.Source.ShortName(),
+          elements.Tail.Data.Target.ShortName());
+      return str;
+    }
+
   }
 
 }

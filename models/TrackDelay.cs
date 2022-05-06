@@ -39,6 +39,13 @@ namespace LondonTube {
       return delays;
     }
 
+    public Delay getLastDelay(){
+      return delays.Tail.Data;
+    }
+
+    public Station getNextStation(){
+      return delays.Tail.Data.Connection.Target.Station;
+    }
 
     public Line GetLine(){
       return delays.Head.Data.Connection.Source.Line;
@@ -53,6 +60,19 @@ namespace LondonTube {
       return totalDelay;
     }
 
+
+    override public String ToString(){
+      var str = "";
+      foreach(Delay delay in delays) {
+        str += String.Format("Delay between {0} and {1}: {2} min{3}\n", 
+          delay.Connection.Source.ShortName(),
+          delay.Connection.Target.ShortName(),
+          delay.Time,
+          delay.Time > 1 ? "s" : ""
+        );
+      }
+      return str;
+    }
   }
 
 }

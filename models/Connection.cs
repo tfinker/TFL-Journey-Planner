@@ -18,6 +18,10 @@ namespace LondonTube {
     public Delay Delay {get;set;}
 
     public Connection(Platform source, Platform target, Double time, ModeType mode) {
+      if ((source == null) || (target == null)){
+        throw new InvalidOperationException("Platform can not be null");
+      }
+      
       this.Source = source;
       this.Target = target;
       this.standardTime = time;

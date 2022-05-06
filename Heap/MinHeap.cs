@@ -108,7 +108,7 @@ namespace LondonTube
       }
 
       private bool isChildHigherPriority(int parentIndex, int childIndex){
-        if (heap[parentIndex].CompareTo(heap[childIndex]) < 0){
+        if (heap[parentIndex].CompareTo(heap[childIndex]) > 0){
           return true;
         }
         else {
@@ -136,7 +136,7 @@ namespace LondonTube
       }
 
       private int getHigherPriorityIndex(int leftIndex, int rightIndex){
-        if(heap[leftIndex].CompareTo(heap[rightIndex]) > 0){
+        if(heap[leftIndex].CompareTo(heap[rightIndex]) < 0){
           return leftIndex;
         }
         else {

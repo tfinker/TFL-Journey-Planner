@@ -48,7 +48,6 @@ namespace LondonTube
         if (other == null){
           return 1;
         }
-
         return weight.CompareTo(other.weight);
       }
 
