@@ -45,13 +45,19 @@ namespace LondonTube {
 
     
 
-    override public String ToString(){
+    public String LongString(){
        
       var str = $"Station: {Name}";
+      str += "\nPlatforms:";
       foreach(Platform platform in platforms){
-        str += $"\n\t Platform: {platform.Line.Name.ToString()} {platform.Line.Direction.ToString()}";
+        str += $"\n\t - {platform.Line.Name.ToString()} ({platform.Line.Direction.ToString()})";
       }
       return str;
+    }
+
+    override public String ToString(){
+       
+      return $"Station: {Name}";
     }
   }
 }

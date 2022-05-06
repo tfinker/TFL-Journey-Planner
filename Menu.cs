@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LondonTube
 {
@@ -46,17 +42,19 @@ namespace LondonTube
             {
                 Console.WriteLine("");
                 Console.WriteLine("Welcome to the Engineers Menu");
+                Console.WriteLine(" - Press (0) to Return to Main Menu");
                 Console.WriteLine(" - Press (1) to Add Delay to a Line");
                 Console.WriteLine(" - Press (2) to Remove Delay from a Line");
                 Console.WriteLine(" - Press (3) to Close a Track Section");
                 Console.WriteLine(" - Press (4) to Open a Track Section");
                 Console.WriteLine(" - Press (5) to Show Closed Track Sections");
                 Console.WriteLine(" - Press (6) to Show Delayed Track Sections");
-                Console.WriteLine(" - Press (7) to Return to Main Menu");
                 Console.Write("Please enter an option: ");
                 switch (Console.ReadLine())
                 {
-
+                    case "0":
+                        mainMenu();
+                        break;
                     case "1":
                         AddDelayMenu();
                         break;
@@ -70,16 +68,14 @@ namespace LondonTube
                         ReopenSectionOfTrack();
                         break;
                     case "5":
-                        //listClosures();
+                        ListClosures();
                         break;
                     case "6":
-                        //listDelays();
+                        ListDelays();
                         break;
-                    case "7":
-                        mainMenu();
-                        break;
+
                     default:
-                        Console.WriteLine("Invalid selection. Please enter an option from 1 to 7");
+                        Console.WriteLine("Invalid selection. Please enter an option from 0 to 6");
                         break;
                 }
             }
@@ -90,7 +86,7 @@ namespace LondonTube
         //NOTE*** I need to change the ExpandDelay and AddDelayToLine functions slightly before you do this.
         //this is broken up in two parts, creating a delay and expanding a delay
 
-        public Line AddDelayMenu()
+        public void AddDelayMenu()
 
         //CREATING
 
@@ -100,273 +96,183 @@ namespace LondonTube
             Console.WriteLine();
 
             Console.WriteLine("Add Delay");
+            Console.WriteLine("Please select the line to add a delay");
+            Line selectedLine = getItemfromList<Line>(_tbc.getLines());
 
-            var id = _tbc.getLines();
-            int index = 1;
-            foreach (Line line in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, line.ToString());
+            Console.WriteLine("Please select the station where the delay starts");
+            Station startStation = getItemfromList<Station>(selectedLine.getStations());
+   
+            var delay = getDouble("How long is the delay?");
+            var reason = getString("Why is there a delay?");
+
+            var trackDelay = _tbc.AddDelayToLine(selectedLine, startStation, reason, delay);
+            while (conditional($"Do you want to expand the delay to {trackDelay.getNextStation().Name}? (y/N)")){
+                var newDelay = getDouble("How long is the delay?");
+                _tbc.ExpandDelay(trackDelay, newDelay);
             }
 
-            //2) ask user which line to apply delay
-
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Please select the Line to add a Delay");
-                    return id[Convert.ToInt32(Console.ReadLine())];
-                }
-                catch
-                {
-                    Console.WriteLine("Incorrect option, please try again");
-                }
-            }
+            Console.WriteLine(trackDelay.ToString());
         }
 
-        //3) Get stations list from that line object
-
-        //4) Ask user which station the delay starts at(we can only create a delay between stations that are next to each other)
-
-        //5) Ask the delay time
-
-        //6) Ask the delay reason
-
-        //7) Submit the delay to AddDelayToLine(Line line, Station source, Station target, String reason, Double time)
-
-        // Target must be the next station on the line(this is actually a bit obsolete sicne hte user doesn't select this, I might remove the target argument)
-
-        //EXPANDING
-
-        //8) Display the next station and Ask the user if they wnat to expand the delay using the trackDelay object that was returned
-
-        //9) Ask for a delay time
-
-        //10) Submit to TubeController.ExpandDelay(TrackDelay trackDelay, Double time)
-
-        //11) repeat 8-10 until they dont want to expand
-
-        ////Remove Delay
-
-        public TrackDelay RemoveDelayMenu()
-        {
-
-            //1) Get delays from TubeController.Delays
-
-            Console.WriteLine();
-            Console.WriteLine("Remove Delays");
-
-            var id = _tbc.getDelays();
-            int index = 1;
-            foreach (TrackDelay line in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, line.ToString());
-            }
-
-            //    2) ask user which delay they want to remove
-
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Please select the Delay you would like to remove");
-                    return id[Convert.ToInt32(Console.ReadLine())];
-                }
-                catch
-                {
-                    Console.WriteLine("Incorrect option, please try again");
-                }
-            }
-        }
-
-        //                Console.WriteLine("Are you sure tou want to this delay? (Y/N): ");
-        //                switch (Console.ReadLine())
-        //                {
-        //                    case "Y":
-        //                        return;
-        //                    case "N":
-        //                        return;
-        //                    default:
-        //                        Console.WriteLine("Wrong value entered, please try again");
-        //                        break;
-        //                }
-
-        //3) Use RemoveDelay(TrackDelay trackDelay)
-
-        //Close Section of track
-
-        public Line CloseSectionOfTrack()
-        {
-
-            //    1) Get the lines list from tube controller
-
-
+        private void RemoveDelayMenu() {
             Console.WriteLine();
 
-            Console.WriteLine("Line Clousures");
-
-            var id = _tbc.getLines();
-            int index = 1;
-            foreach (Line line in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, line.ToString());
+            var delays = _tbc.getDelays();
+            if (delays.getLength() == 0){
+                Console.WriteLine("No track delays");
+                return;
             }
 
-            //    2) Ask user which line they want to close
+            Console.WriteLine("Remove Delay");
+            Console.WriteLine("Please select the delay to remove");
+            TrackDelay selectedDelay = getItemfromList<TrackDelay>(delays);
+            _tbc.RemoveDelay(selectedDelay);
 
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Please select the Line to add a Closure");
-                    return id[Convert.ToInt32(Console.ReadLine())];
-                }
-                catch
-                {
-                    Console.WriteLine("Incorrect option, please try again");
-                }
-            }
         }
 
-
-        //                Console.WriteLine("Are you sure tou want to make a closure on this line? (Y/N): ");
-        //                switch (Console.ReadLine())
-        //                {
-        //                    case "Y":
-        //                        return;
-        //                    case "N":
-        //                        return;
-        //                    default:
-        //                        Console.WriteLine("Wrong value entered, please try again");
-        //                        break;
-        //                }
-
-
-        //    3) Get stations list form that line object
-
-        //    4) Ask user which station the closure starts at
-
-
-
-
-        //                Console.WriteLine("Please enter starting station");
-        //                Console.ReadLine();
-
-
-        //                        Console.WriteLine("Is this the correct starting station? (Y/N): ");
-        //                        
-        //                        {
-        //                            case "Y":
-        //                                return;
-        //                            case "N":
-        //                                return;
-        //                            default:
-        //                                Console.WriteLine("Wrong value entered, please try again");
-        //                                break;
-        //                        }
-
-
-        //    5) Ask user which station the closure ends at
-
-        //                    Console.WriteLine("Please enter end station");
-        //                    Console.ReadLine();
-
-        //                            Console.WriteLine("Is this the correct end station? (Y/N): ");
-        //                            switch (Console.ReadLine())
-        //                            {
-        //                                case "Y":
-        //                                    return;
-        //                                case "N":
-        //                                    return;
-        //                                default:
-        //                                    Console.WriteLine("Wrong value entered, please try again");
-        //                                    break;
-        //                            }
-
-
-        //    6) Ask for a reason
-
-        //        private string getNote()
-        //        {
-        //            Console.WriteLine("Please enter a note: (Press enter to leave blank)");
-        //            string note = Console.ReadLine();
-        //            return note;
-        //        }
-
-
-
-        //    7) Submit to CloseSectionOfTrack(Line line, Station source, Station target, String reason)
-
-        //Reopen section of track
-
-
-        public TrackClosure ReopenSectionOfTrack()
-
+        private void CloseSectionOfTrack()
         {
-            //    1) Get the closures from TubeController.closures
-
             Console.WriteLine();
 
-            Console.WriteLine("Line Clousures");
+            Console.WriteLine("Add Closure");
+            Console.WriteLine("Please select the line to add a closure");
+            Line selectedLine = getItemfromList<Line>(_tbc.getLines());
 
-            var id = _tbc.getClosures();
-            int index = 1;
-            foreach (TrackClosure closure in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, closure.ToString());
+            Console.WriteLine("Please select the station where the closure starts");
+            var stations = selectedLine.getStations();
+            stations.RemoveLast();
+            Station startStation = getItemfromList<Station>(stations);
+            
+            Console.WriteLine("Please select the station where the closure end");
+            Station endStation = getItemfromList<Station>(selectedLine.getStationsAfter(startStation));
+
+            var reason = getString("Why is there a closure?");
+
+            var closure = _tbc.CloseSectionOfTrack(selectedLine, startStation, endStation, reason);
+
+            Console.WriteLine();
+            Console.WriteLine(closure.ToString());
+        }
+
+        private void ReopenSectionOfTrack() {
+            Console.WriteLine();
+
+            var closures = _tbc.getClosures();
+            if (closures.getLength() == 0){
+                Console.WriteLine("No track closures");
+                return;
             }
 
-            //    2) ask user which closure to reopen
+            Console.WriteLine("Reopen Closure");
+            Console.WriteLine("Please select the closure to reopen");
+            TrackClosure selectedClosure = getItemfromList<TrackClosure>(closures);
+            _tbc.ReopenSectionOfTrack(selectedClosure);
+        }
+
+        private void ListClosures(){
+            Console.WriteLine();
+
+            var closures = _tbc.getClosures();
+            if (closures.getLength() == 0){
+                Console.WriteLine("No track closures");
+                return;
+            }
+
+            Console.WriteLine("Active Track Closures");
+            var index=0;
+            foreach(TrackClosure closure in _tbc.getClosures()){
+                Console.WriteLine("{0}\t - {1}", index++, closure.ToString());
+            }
+        }
+
+        private void ListDelays(){
+            Console.WriteLine();
+
+            var delays = _tbc.getDelays();
+            if (delays.getLength() == 0){
+                Console.WriteLine("No track delays");
+                return;
+            }
+
+            Console.WriteLine("Active Track Delays");
+            var index=0;
+            foreach(TrackDelay delay in _tbc.getDelays()){
+                Console.WriteLine("{0}\t - {1}", index++, delay.ToString());
+            }
+        }
+
+        private bool conditional(string message){
+            Console.WriteLine(message);
+            while(true){
+                try {
+                    switch(Console.ReadLine().ToUpper()){
+                    case "Y":
+                        return true;
+                    case "N":
+                        return false;
+                    }
+                }
+                catch {
+                    Console.WriteLine("Invalid entry, please try again. Must be y or n.");
+                }
+            }
+        }
+
+        private Double getDouble(string message) {
+            Console.WriteLine(message);
+            while(true){
+                //Console.WriteLine("Please enter a decimal number: ");
+                try {
+                    return Convert.ToDouble(Console.ReadLine());
+                }
+                catch {
+                    Console.WriteLine("Invalid entry, please try again. Must be a decimal number.");
+                }
+            }
+        }
+
+        private String getString(string message) {
+            Console.WriteLine(message);
+            while(true){
+               // Console.WriteLine("Please enter some text: ");
+                try {
+                    return Console.ReadLine();
+                }
+                catch {
+                    Console.WriteLine("Invalid entry, please try again");
+                }
+            }
+        }
+
+
+        private T getItemfromList<T>(List<T> items){
+            int index=0;
+            foreach(T item in items){
+                Console.WriteLine("{0} -\t{1}", index++, item.ToString());
+            }
 
             while (true)
             {
                 try
                 {
-                    Console.WriteLine("Please select a Closure you would like to remove");
-                    return id[Convert.ToInt32(Console.ReadLine())];
+                    return items[Convert.ToInt32(Console.ReadLine())];
                 }
                 catch
                 {
                     Console.WriteLine("Incorrect option, please try again");
                 }
-
             }
+
         }
 
-        //    3) Submit closure to ReopenSectionOfTrack(TrackClosure closure)
+        String getTimeString(double time)
+            {
+                int integer = (int) time;
+                var seconds = time - integer;
+                seconds = (int) (60 / (1/seconds));
+                return $"{integer}:{seconds} min" + (time > 1.0 ? "s" : "");
+            }
 
-        //            public void listClosures()
-
-        //            {
-        //                Console.WriteLine("Closure List");
-
-        //                if (elements.Count == 0)
-
-        //                {
-        //                    Console.WriteLine("No current track closures");
-        //                }
-
-        //                foreach (TrackClosure tc in elements)
-        //                {
-        //                    Console.WriteLine(tc);
-        //                }
-        //            }
-
-        //            public void listDelays()
-        //            {
-        //                Console.WriteLine("List Closures");
-
-        //                if (delays.Count == 0)
-
-        //                {
-        //                    Console.WriteLine("No current delays");
-        //                }
-
-        //                foreach (TrackClosure tc in delays)
-        //                {
-        //                    Console.WriteLine(tc);
-        //                }
-        //            }
 
         public void customerMenu()
         {
@@ -374,23 +280,24 @@ namespace LondonTube
             {
                 Console.WriteLine("");
                 Console.WriteLine("Welcome to Customer Journey Planner Menu");
+                Console.WriteLine(" - Press (0) to Return to Main Menu");
                 Console.WriteLine(" - Press (1) to find Fastest Route");
                 Console.WriteLine(" - Press (2) to display Station Information");
-                Console.WriteLine(" - Press (3) to Return to Main Menu");
                 Console.WriteLine("Please enter an option: ");
                 switch (Console.ReadLine())
                 {
+                    case "0":
+                        mainMenu();
+                        break;
                     case "1":
                         findFastestRoute();
                         break;
                     case "2":
                         displayStationInfo();
                         break;
-                    case "3":
-                        mainMenu();
-                        break;
+
                     default:
-                        Console.WriteLine("Invalid selection. Please enter an option from 1 to 3");
+                        Console.WriteLine("Invalid selection. Please enter an option from 0 to 2");
                         break;
                 }
             }
@@ -407,118 +314,70 @@ namespace LondonTube
 
             Console.WriteLine("Find Fastest Route");
 
-            var id = _tbc.getStations();
-            int index = 1;
+            Console.WriteLine("Please select the starting station");
+            Station startStation = getItemfromList<Station>(_tbc.getStations());
 
-            foreach (Station station in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, station.ToString());
+            Console.WriteLine("Please select the destination");
+            var destinations = _tbc.getStations();
+            destinations.RemoveItem(startStation);
+            Station destination = getItemfromList<Station>(destinations);
+            
+            var path = _tbc.getShortestPath(startStation, destination);
+            if (path == null){
+                Console.WriteLine("No route available!");
             }
-
+            else
+                printPath(path);
 
         }
 
-        //2) Ask user which station they want to start from the stations list
-
-        //    Console.WriteLine("");
-        //    Console.WriteLine("Enter Starting Station");
-        //    Console.ReadLine();
-
-        //3) Ask user which station they want to destination from the stations list
-
-        //    Console.WriteLine("Enter End Station");
-        //    Console.ReadLine();
-
-        //4) call path = TubeController.GetShortestPath(startstation, endstation)
-        //5) call PrintPath(path) (function originally in TubeController.PrintPath())
 
 
         ////Display station info we are going to give the user the ability to view information on a station 
 
-        private Station displayStationInfo()
+        private void displayStationInfo()
         {
 
-            //1) Get stations list from tube controller
-
             Console.WriteLine();
-
             Console.WriteLine("Station Information");
 
-            var id = _tbc.getStations();
-            int index = 1;
+            Console.WriteLine("Please select a station");
+            Station station = getItemfromList<Station>(_tbc.getStations());
+            
+            Console.WriteLine();
+            Console.WriteLine(station.LongString());
 
-            foreach (Station station in id)
-            {
-                Console.WriteLine("{0} - {1}", index++, station.ToString());
-            }
-
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Please select the Station for further information");
-                    return id[Convert.ToInt32(Console.ReadLine())];
-
-                }
-                catch
-                {
-                    Console.WriteLine("Incorrect option, please try again");
-                }
-
-            }
         }
 
+        private void printPath(Path<Platform> path)
+           {
 
-        //    //2) Ask user which station they want to view from the stations list
-        //    while (true)
-        //    {
-        //        Console.WriteLine();
-        //        Console.WriteLine("Enter Station Name for further details: ");
-        //        Console.WriteLine();
 
-        //        //3) Use Station.GetStationInfo() to display information(we will need to create a getStationInfo function - ask for help, use ToString for now)
 
-        //        ////Station station = Console.ReadLine();
-        //        ////Console.WriteLine();
-        //        ////if (_tbc.TubeController().ContainsKey(station))
-        //        ////    return station;
-        //        //else
-        //        //    Console.WriteLine($" {station} does not exist");
-        //    }
-        //}
+               Console.WriteLine($"\nFastest Route from {path.startVertex.Station.Name} to {path.destination.Station.Name}");
+               Console.WriteLine($"\n - {path.startVertex.Line.Name} ({path.startVertex.Line.Direction}): {path.startVertex.Station.Name} ");
 
-        //public void printPath(Path<Platform> path)
-        //    {
+               double segmentTime = 0;
+               foreach (Edge<Platform> edge in path.getPath())
+               {
+                   var connection = edge.Source.getConnection(edge.Target);
 
-        //        String getTimeString(int time)
-        //        {
-        //            return $"{time} min" + (time > 1 ? "s" : "");
-        //        }
+                   if (connection.mode == ModeType.Interchange)
+                   {
+                       Console.WriteLine($" >>> {getTimeString(segmentTime)}");
+                       Console.WriteLine($" - {edge.Source.Line.Name} ({edge.Source.Line.Direction}): {edge.Source.Station.Name}  ");
+                       Console.WriteLine($"\n >>> Change lines {getTimeString(edge.Weight)} \n");
+                       Console.WriteLine($" - {edge.Target.Line.Name} ({edge.Target.Line.Direction}): {edge.Target.Station.Name}  ");
+                   }
+                   else
+                   {
+                       segmentTime += edge.Weight;
+                   }
+               }
+               Console.WriteLine($" >>> {getTimeString(segmentTime)}");
+               Console.WriteLine($" - {path.destination.Line.Name} ({path.destination.Line.Direction}): {path.destination.Station.Name}  ");
 
-        //        Console.WriteLine($"Path from {path.startVertex.Station.Name} to {path.destination.Station.Name}");
-        //        Console.WriteLine($" - {path.startVertex.Line.Name}: {path.startVertex.Station.Name} ({path.startVertex.Line.Direction})");
-
-        //        int segmentTime = 0;
-        //        foreach (Edge<Platform> edge in path.getPath())
-        //        {
-        //            var connection = edge.Source.getConnection(edge.Target);
-
-        //            if (connection.mode == ModeType.Interchange)
-        //            {
-        //                Console.WriteLine($" - {getTimeString(segmentTime)}");
-        //                Console.WriteLine($" - {edge.Source.Line.Name}: {edge.Source.Station.Name} ({edge.Source.Line.Direction}) --  ");
-        //                Console.WriteLine($"Change lines {edge.Weight} min" + (edge.Weight > 1 ? "s" : ""));
-        //                Console.WriteLine($" - {edge.Target.Line.Name}: {edge.Target.Station.Name} ({edge.Target.Line.Direction}) ");
-        //            }
-        //            else
-        //            {
-        //                segmentTime += edge.Weight;
-        //            }
-        //        }
-        //        Console.WriteLine($" - {getTimeString(segmentTime)}");
-        //        Console.WriteLine($" - {path.destination.Line.Name}: {path.destination.Station.Name} ({path.destination.Line.Direction}) ");
-
-        //        Console.WriteLine($"\n--Total time: {getTimeString(path.weight)}");
-        //    }
+               Console.WriteLine($"\n-- Total time: {getTimeString(path.weight)}");
+           }
     }
 }
