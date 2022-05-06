@@ -49,7 +49,7 @@ namespace LondonTube {
       var platform = new Platform(line, station, platforms.getLength());
       addPlatform(platform);
       station.AddPlatform( platform );
-      line.addStation(station);
+      line.UpdateStation(station);
     }
 
     public void createConnection(Line sourceLine, Station source, Line targetLine, Station target, double time, ModeType mode){
@@ -99,19 +99,15 @@ namespace LondonTube {
       throw new IndexOutOfRangeException("Platform IDs do not match");
     }
 
-    private List<Path<Platform>> mapPathsToModel(List<Path<int>> paths){
-      var platformPaths = new List<Path<Platform>>();
+    private Path<Platform> mapPathToModel(Path<int> path){
 
-      foreach(var path in paths){
-        var pPath = new Path<Platform>(getPlatformFromInt(path.startVertex), getPlatformFromInt(path.destination));
+        var platformPath = new Path<Platform>(getPlatformFromInt(path.startVertex), getPlatformFromInt(path.destination));
         foreach(Edge<int> edge in path.getPath()){
           var platformEdge = new Edge<Platform>(getPlatformFromInt(edge.Source), getPlatformFromInt(edge.Target), edge.Weight);
-          pPath.InsertNode(platformEdge);
+          platformPath.InsertNode(platformEdge);
         }
-        platformPaths.InsertLast(pPath);
-      }
 
-      return platformPaths;
+      return platformPath;
     }   
 
     public Path<Platform> getShortestPath(Station source, Station target){
@@ -128,11 +124,14 @@ namespace LondonTube {
           }
         }
       }
+      if (paths.Length == 0){
+        return null;
+      }
+
       List<Path<int>> orderedPaths = paths.Sort();
+      //var la = mapPathToModel(orderedPaths.getFirstItem());
+      return mapPathToModel(orderedPaths.getFirstItem());
 
-      List<Path<Platform>> tubePaths = mapPathsToModel(orderedPaths);
-
-      return tubePaths.getFirstItem();
     }
 
 
@@ -239,14 +238,15 @@ namespace LondonTube {
       return connection;
     }
 
-    public TrackDelay AddDelayToLine(Line line, Station source, Station target, String reason, Double time){
+    public TrackDelay AddDelayToLine(Line line, Station source, String reason, Double time){
       // user needs to add delays to specific connections between stations
       // any connections with a delay need to be added to a delay object
       // a delay object should contain all adjacent connections with a delay
       // this creates a track section of delays
       // user can then clear a whole section of delays in one go
 
-      var connection = validateDelay(source.GetPlatform(line), target.GetPlatform(line));
+      //var connection = validateDelay(source.GetPlatform(line), target.GetPlatform(line));
+      var connection = source.GetPlatform(line).getNextConnectionOnLine();
 
       var trackDelay = new TrackDelay(reason);
       var delay = new Delay(connection, trackDelay, time);
@@ -263,13 +263,14 @@ namespace LondonTube {
     }
 
 
-    public void ExpandDelay(TrackDelay trackDelay, Station source, Station target, Double time) {
+    public void ExpandDelay(TrackDelay trackDelay, Double time) {
 
       if ( time <= 0 ) {
         throw new InvalidOperationException("Delay time must be greater than zero");
       }
 
-      var connection = validateDelay(source.GetPlatform(trackDelay.GetLine()), target.GetPlatform(trackDelay.GetLine()));
+      var lastDelay = trackDelay.getLastDelay();
+      var connection = lastDelay.Connection.Target.getNextConnectionOnLine();
 
       var delay = new Delay(connection, trackDelay, time);
       trackDelay.Insert(delay);

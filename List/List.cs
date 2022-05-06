@@ -81,13 +81,17 @@ namespace LondonTube {
       if (array.Length == 0){
         throw new IndexOutOfRangeException();
       }
-      return array[array.Length];
+      return array[array.Length-1];
     }
     public T getItemAtIndex(int index) {
       if (array.Length == 0 || index >= array.Length){
         throw new IndexOutOfRangeException();
       }
       return array[index];
+    }
+
+    public T RemoveLast(){
+      return RemoveItem(getLastItem());
     }
 
     public T RemoveItem( T item ){

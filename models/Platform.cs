@@ -38,6 +38,10 @@ namespace LondonTube {
       return null;
     }
 
+    public String ShortName(){
+      return $"{Station.Name} ({Line.Name.ToString()} {Line.Direction.ToString()})";
+    }
+
     override public String ToString(){
       var str = $"Platform: {ID}, Station: {Station.Name}, Line: {Line.Name.ToString()} {Line.Direction.ToString()}";
       foreach(Connection connection in connections){
