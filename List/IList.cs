@@ -13,6 +13,8 @@ namespace LondonTube {
     public T getItemAtIndex(int index);
 
     public void RemoveItem(T item);
+    public T RemoveFirst();
+    public T RemoveLast();
 
     // public bool itemExists(T item);
     public int getIndexOfItem(T item);
