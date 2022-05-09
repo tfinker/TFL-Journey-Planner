@@ -311,10 +311,10 @@ namespace LondonTube
             Console.WriteLine("Find Fastest Route");
 
             Console.WriteLine("Please select the starting station");
-            Station startStation = getItemfromList<Station>(_tbc.getStations());
+            Station startStation = getItemfromList<Station>(_tbc.getStations().Sort<Station>());
 
             Console.WriteLine("Please select the destination");
-            var destinations = _tbc.getStations();
+            var destinations = _tbc.getStations().Sort<Station>();
             destinations.RemoveItem(startStation);
             Station destination = getItemfromList<Station>(destinations);
             
