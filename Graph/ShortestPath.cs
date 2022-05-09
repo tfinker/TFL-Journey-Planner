@@ -28,7 +28,7 @@ namespace LondonTube
 
       }
 
-      public void getShortestPaths(){
+      private void getShortestPaths(){
 
         DistTo[startVertex] = 0;
         queue.Enqueue(new QueueObject(startVertex, DistTo[startVertex]));
@@ -57,6 +57,7 @@ namespace LondonTube
         for( int i = 0; i< EdgeTo.Length;i++){
           var edge = EdgeTo[index];
           if (edge == null){
+            // there is no path to destination
             return null;
           }
           path.InsertFirst(edge);

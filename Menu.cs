@@ -36,7 +36,7 @@ namespace LondonTube
             }
         }
 
-        public void engineersMenu()
+        private void engineersMenu()
         {
             while (true)
             {
@@ -81,17 +81,8 @@ namespace LondonTube
             }
         }
 
-        //Add delay
-
-        //NOTE*** I need to change the ExpandDelay and AddDelayToLine functions slightly before you do this.
-        //this is broken up in two parts, creating a delay and expanding a delay
-
-        public void AddDelayMenu()
-
-        //CREATING
-
+        private void AddDelayMenu()
         {
-            //1) Get the lines list from tube controller
 
             Console.WriteLine();
 
@@ -127,6 +118,8 @@ namespace LondonTube
             Console.WriteLine("Please select the delay to remove");
             TrackDelay selectedDelay = getItemfromList<TrackDelay>(delays);
             _tbc.RemoveDelay(selectedDelay);
+
+            Console.WriteLine("Delay Removed");
 
         }
 
@@ -167,6 +160,9 @@ namespace LondonTube
             Console.WriteLine("Please select the closure to reopen");
             TrackClosure selectedClosure = getItemfromList<TrackClosure>(closures);
             _tbc.ReopenSectionOfTrack(selectedClosure);
+
+            Console.WriteLine("Track Reopened");
+
         }
 
         private void ListClosures(){
@@ -221,7 +217,6 @@ namespace LondonTube
         private Double getDouble(string message) {
             Console.WriteLine(message);
             while(true){
-                //Console.WriteLine("Please enter a decimal number: ");
                 try {
                     return Convert.ToDouble(Console.ReadLine());
                 }
@@ -250,11 +245,12 @@ namespace LondonTube
             foreach(T item in items){
                 Console.WriteLine("{0} -\t{1}", index++, item.ToString());
             }
-
+            
             while (true)
             {
                 try
                 {
+                    Console.Write("Please enter an index: ");
                     return items[Convert.ToInt32(Console.ReadLine())];
                 }
                 catch
@@ -274,7 +270,7 @@ namespace LondonTube
             }
 
 
-        public void customerMenu()
+        private void customerMenu()
         {
             while (true)
             {
@@ -315,10 +311,10 @@ namespace LondonTube
             Console.WriteLine("Find Fastest Route");
 
             Console.WriteLine("Please select the starting station");
-            Station startStation = getItemfromList<Station>(_tbc.getStations());
+            Station startStation = getItemfromList<Station>(_tbc.getStations().Sort<Station>());
 
             Console.WriteLine("Please select the destination");
-            var destinations = _tbc.getStations();
+            var destinations = _tbc.getStations().Sort<Station>();
             destinations.RemoveItem(startStation);
             Station destination = getItemfromList<Station>(destinations);
             
@@ -342,7 +338,7 @@ namespace LondonTube
             Console.WriteLine("Station Information");
 
             Console.WriteLine("Please select a station");
-            Station station = getItemfromList<Station>(_tbc.getStations());
+            Station station = getItemfromList<Station>(_tbc.getStations().Sort<Station>());
             
             Console.WriteLine();
             Console.WriteLine(station.LongString());

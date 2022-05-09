@@ -6,7 +6,7 @@ namespace LondonTube
     {
         static void Main(string[] args)
         {
-                        var tube = new TubeController();
+            var tube = new TubeController();
             
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //          CREATING STATIONS
@@ -1219,35 +1219,7 @@ namespace LondonTube
             tube.createConnection(JubileeWestbound, Stratford, CentralWestbound, Stratford, 2, ModeType.Interchange);
 
 
-            // tube.PrintModel();
-
             tube.loadWeightedGraph("Tube");
-
-            var path = tube.getShortestPath(Walthamstow, FinsburyPark);
-            if (path != null){
-                tube.printPath(path);
-            }
-            //tube.printGraph();
-
-            var closure = tube.CloseSectionOfTrack(VictoriaSouthbound, Walthamstow, BlackhorseRoad, "Leaves on track");
-            
-            //tube.printGraph();
-
-            tube.ReopenSectionOfTrack(closure);
-
-            //tube.printGraph();
-
-            var delay = tube.AddDelayToLine(VictoriaSouthbound, Walthamstow, "Hamsters", 2);
-            Console.WriteLine(delay.ToString());
-            //tube.printGraph();
-            tube.ExpandDelay(delay, 2);
-            Console.WriteLine(delay.ToString());
-
-            //tube.printGraph();
-
-            tube.RemoveDelay(delay);
-
-            // tube.printGraph();
 
            Menu menu = new Menu(tube);
 

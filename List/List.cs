@@ -90,6 +90,10 @@ namespace LondonTube {
       return array[index];
     }
 
+    public T RemoveFirst(){
+      return RemoveItem(getFirstItem());
+    }
+
     public T RemoveLast(){
       return RemoveItem(getLastItem());
     }
@@ -138,6 +142,11 @@ namespace LondonTube {
 
     public ListEnumerator<T> GetEnumerator() {
       return new ListEnumerator<T>(array);
+    }
+
+    public List<T> Sort<T>() where T : IComparable<T> {
+      var heap = new MinHeap<T>(array as T[]);
+      return heap.Sort();
     }
   }
 }

@@ -33,7 +33,7 @@ namespace LondonTube
 
                 cardEdges++;
 
-                Console.WriteLine("Edge ({0}, {1}) added to graph", sourceVertex, destinationVertex);
+                //Console.WriteLine("Edge ({0}, {1}) added to graph", sourceVertex, destinationVertex);
                 return true;
               }
               else {
@@ -66,7 +66,7 @@ namespace LondonTube
 
                     this.cardEdges--;
 
-                    Console.WriteLine("Edge ({0}, {1}): Deleted", sourceVertex, destinationVertex);
+                    //Console.WriteLine("Edge ({0}, {1}): Deleted", sourceVertex, destinationVertex);
                     return true;
                 }
                 else

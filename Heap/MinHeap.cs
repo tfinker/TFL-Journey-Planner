@@ -2,7 +2,7 @@ using System;
 
 namespace LondonTube
 {
-
+    // code based on https://codereview.stackexchange.com/questions/238085/generic-heap-implementation-in-c
     class MinHeap<T> : Heap<T> where T : IComparable<T>
     {
 
@@ -24,12 +24,18 @@ namespace LondonTube
           throw new ArgumentNullException();
         }
           addToHeap(item);
-          BubbleUp(getLastIndex());
+          SortUp(getLastIndex());
           
       }
 
       override public T RemoveHead() {
-        var head = removeHead();
+        int headIndex = 1;
+        if (Length == 0){
+          throw new IndexOutOfRangeException("Heap is empty");
+        }
+        swapItems(headIndex, getLastIndex());
+        var head = removeFromHeap(getLastIndex());
+        SortDown(headIndex);
         return head;
       }
 
@@ -39,23 +45,13 @@ namespace LondonTube
         // var copiedArray = new T[heap.Length-1];
         // Array.Copy(heap, 1, copiedArray, 0, copiedArray.Length);
         var copiedHeap = new MinHeap<T>(heap[1..heap.Length]);
-        
-        for(int i=0;i<copiedHeap.Length;i++){
+        int length = copiedHeap.Length;
+        for(int i=0;i<length;i++){
           sortedItems.InsertLast(copiedHeap.RemoveHead());
         }
         return sortedItems;
       }
 
-      private T removeHead(){
-        int headIndex = 1;
-        if (Length == 0){
-          throw new IndexOutOfRangeException("Heap is empty");
-        }
-        swapItems(headIndex, getLastIndex());
-        var head = removeFromHeap(getLastIndex());
-        BubbleDown(headIndex);
-        return head;
-      }
 
       private void addToHeap(T item) {
         Array.Resize(ref heap, heap.Length+1);
@@ -70,7 +66,7 @@ namespace LondonTube
         return item;
       }
 
-      private void BubbleUp(int childIndex){
+      private void SortUp(int childIndex){
         if (childIndex <= 1) {
           return;
         }
@@ -79,11 +75,11 @@ namespace LondonTube
 
         if (isChildHigherPriority(parentIndex, childIndex)) {
           swapItems(parentIndex, childIndex);
-          BubbleUp(parentIndex);
+          SortUp(parentIndex);
         }
       }
 
-      private void BubbleDown(int parentIndex){
+      private void SortDown(int parentIndex){
         var leftChildIndex = getLeftChildIndex(parentIndex);
         var rightChildIndex = getRightChildIndex(parentIndex);
 
@@ -104,7 +100,7 @@ namespace LondonTube
           return;
         }
         swapItems(parentIndex, highestPriorityIndex);
-        BubbleDown(highestPriorityIndex);
+        SortDown(highestPriorityIndex);
       }
 
       private bool isChildHigherPriority(int parentIndex, int childIndex){
