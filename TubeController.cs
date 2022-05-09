@@ -38,6 +38,7 @@ namespace LondonTube {
       stations.InsertLast(station);
       return station;
     }
+    
     public Line createLine(LineName lineName, Direction direction){
       Line newLine = new Line(lineName, direction);
       lines.InsertLast(newLine);
@@ -58,39 +59,15 @@ namespace LondonTube {
 
       sourcePlatform.addConnection( new Connection(sourcePlatform, targetPlatform, time, mode) );
     }
-
-
-    public void PrintModel(){
-
-      foreach(Line line in lines){
-        Console.WriteLine(line.ToString());
-      }
-
-      foreach(Station station in stations){
-        Console.WriteLine(station.ToString());
-      }
-
-      foreach(Platform platform in platforms){
-        Console.WriteLine(platform.ToString());
-      }
-    }
-
-    public void printGraph(){
-      graph.Print();
-    }
-
-    public int getVertexCount(){
-      return platforms.getLength();
-    }
+    
     public void loadWeightedGraph(String name){
-      graph = new GraphAdjListWeighted(name, getVertexCount());
+      graph = new GraphAdjListWeighted(name, platforms.getLength());
       foreach(Platform platform in platforms){
         foreach(Connection connection in platform.connections){
           graph.addEdge(connection.Source.ID, connection.Target.ID, connection.standardTime);
         }
       }
     }
-
 
     private Platform getPlatformFromInt(int id){
       if (platforms[id].ID == id){
@@ -134,35 +111,6 @@ namespace LondonTube {
 
     }
 
-
-    public void printPath(Path<Platform> path) {
-
-        String getTimeString(Double time){
-          return $"{time} min" + (time > 1 ? "s" : "");
-        }
-        
-        Console.WriteLine($"Path from {path.startVertex.Station.Name} to {path.destination.Station.Name}");
-        Console.WriteLine($" - {path.startVertex.Line.Name}: {path.startVertex.Station.Name} ({path.startVertex.Line.Direction})");
-        
-        Double segmentTime=0.0;
-        foreach(Edge<Platform> edge in path.getPath()){
-          var connection = edge.Source.getConnection(edge.Target);
-
-          if (connection.mode == ModeType.Interchange) {
-            Console.WriteLine($" - {getTimeString(segmentTime)}");
-            Console.WriteLine($" - {edge.Source.Line.Name}: {edge.Source.Station.Name} ({edge.Source.Line.Direction}) --  ");
-            Console.WriteLine($"Change lines {edge.Weight} min" + (edge.Weight > 1 ? "s":""));
-            Console.WriteLine($" - {edge.Target.Line.Name}: {edge.Target.Station.Name} ({edge.Target.Line.Direction}) ");
-          }
-          else {
-            segmentTime += edge.Weight;
-          }
-        }
-        Console.WriteLine($" - {getTimeString(segmentTime)}");
-        Console.WriteLine($" - {path.destination.Line.Name}: {path.destination.Station.Name} ({path.destination.Line.Direction}) ");
-
-        Console.WriteLine($"\n--Total time: {getTimeString(path.weight)}");
-    }
 
     private void validateTrackConnection(Platform source, Platform target){
         // check if target is after source
@@ -221,23 +169,6 @@ namespace LondonTube {
       closures.RemoveItem(closure);
     }
 
-
-
-    private Connection validateDelay(Platform source, Platform target){
-
-      var connection = source.getNextConnectionOnLine();
-
-      if (connection.Target != target){
-        throw new InvalidOperationException($"Target platform does not match connection");
-      }
-
-      if (connection.Delay != null){
-        throw new InvalidOperationException($"Connection from {connection.Source.Station.Name} to {connection.Target.Station.Name} already has delay");
-      }
-
-      return connection;
-    }
-
     public TrackDelay AddDelayToLine(Line line, Station source, String reason, Double time){
       // user needs to add delays to specific connections between stations
       // any connections with a delay need to be added to a delay object
@@ -261,7 +192,6 @@ namespace LondonTube {
       return trackDelay;
 
     }
-
 
     public void ExpandDelay(TrackDelay trackDelay, Double time) {
 
@@ -293,19 +223,23 @@ namespace LondonTube {
       delays.RemoveItem(trackDelay);
 
     }
-        public List<Station> getStations()
-        {
-            return stations;
-        }
-        public List<TrackClosure> getClosures()
-        {
-            return closures;
-        }
-        public List<TrackDelay> getDelays()
-        {
-            return delays;
-        }
-        public List<Line> getLines()
+    
+    public List<Station> getStations()
+    {
+        return stations;
+    }
+    
+    public List<TrackClosure> getClosures()
+    {
+        return closures;
+    }
+    
+    public List<TrackDelay> getDelays()
+    {
+        return delays;
+    }
+    
+    public List<Line> getLines()
         {
             return lines;
         }

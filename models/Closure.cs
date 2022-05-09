@@ -41,6 +41,13 @@ namespace LondonTube {
       return str;
     }
 
+    public Connection getFirst(){
+      return elements.Head.Data;
+    }
+
+    public Connection getLast(){
+      return elements.Tail.Data;
+    }
   }
 
 }

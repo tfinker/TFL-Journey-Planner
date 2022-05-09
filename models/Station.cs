@@ -1,36 +1,19 @@
 using System;
 
 namespace LondonTube {
-  class Station {
+  class Station : IComparable<Station> {
 
-    // TODO: Binary search tree to identify duplicate names quickly
-    //static String[] names;
     public string Name {get;set;}
-    public Platform[] platforms;
-
-    static Station() {
-     // names = new String[0];
-    }
+    public List<Platform> platforms;
 
     public Station(string name) {
-      // validateName(name);
-     // TubeController.InsertIntoArray<String>(ref names, name);
       Name = name;
-      platforms = new Platform[0];
+      platforms = new List<Platform>();
     }
-
-    // private void validateName(string newName){
-    //   foreach(String name in names){
-    //     if (name.Equals(newName)) {
-    //       throw new TubeModelException($"Station {newName} alredy exists");
-    //     }
-    //   }
-    // }
 
     public void AddPlatform(Platform platform){
 
-      Array.Resize(ref platforms, platforms.Length+1);
-      platforms[platforms.Length-1] = platform;
+      platforms.InsertLast(platform);
 
     }
 
@@ -43,14 +26,20 @@ namespace LondonTube {
       return null;
     }
 
-    
-
     public String LongString(){
        
       var str = $"Station: {Name}";
       str += "\nPlatforms:";
       foreach(Platform platform in platforms){
         str += $"\n\t - {platform.Line.Name.ToString()} ({platform.Line.Direction.ToString()})";
+        if(platform.getNextConnectionOnLine().Delay != null) {
+          var delay = platform.getNextConnectionOnLine().Delay;
+          str+= $"\n\t\t -- Delays affecting this section of line: {delay.Time} min{(delay.Time > 1 ? "s" : "")}";
+        }
+        if(platform.getNextConnectionOnLine().Closure != null) {
+          var closure = platform.getNextConnectionOnLine().Closure;
+          str+= $"\n\t\t -- Closure affecting this station on this line between {closure.getFirst().Source.Station.Name} and {closure.getLast().Target.Station.Name}";
+        }
       }
       return str;
     }
@@ -58,6 +47,12 @@ namespace LondonTube {
     override public String ToString(){
        
       return $"Station: {Name}";
+    }
+
+    public int CompareTo(Station other){
+      if (other == null)
+        return 1;
+      return Name.CompareTo(other.Name);
     }
   }
 }
