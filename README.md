@@ -18,5 +18,6 @@ Algorithms implemented:
 1) Dijkstra's shortest path algorithm
 
 To run:
-1) Open in Visual Studio Code
+1) Run in visual studio code
+2) Or, use precompiled version for Ubuntu-x64
 
