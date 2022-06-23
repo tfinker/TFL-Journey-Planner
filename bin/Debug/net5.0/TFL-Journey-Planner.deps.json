@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "TFL-Journey-Planner/1.0.0": {
+        "runtime": {
+          "TFL-Journey-Planner.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TFL-Journey-Planner/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
